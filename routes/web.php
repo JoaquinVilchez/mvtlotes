@@ -14,13 +14,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('screen.index');
 });
 
 Auth::routes(['verify' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect()->route('screen.index');
+})->name('home');
 
-Route::get('/paneldecontrol', function () {
-    return view('controlpanel');
-});
+Route::get('/pantalla', function () {
+    return view('controlpanel.screen')->with('pagename', 'Pantalla');
+})->name('screen.index');
+
+Route::get('/miperfil', function () {
+    return view('controlpanel.myprofile')->with('pagename', 'Mi perfil');
+})->name('myprofile.index');
+
+Route::get('/personas', function () {
+    return view('controlpanel.persons')->with('pagename', 'Personas');
+})->name('person.index');
+
+Route::get('/sorteo', function () {
+    return view('controlpanel.lottery')->with('pagename', 'Sorteos');
+})->name('lottery.index');
+
+Route::get('/resultados', function () {
+    return view('controlpanel.results')->with('pagename', 'Resultados');
+})->name('result.index');
+
+Route::get('/salida', function () {
+    return view('output.index')->with('pagename', 'Sorteo General');
+})->name('output.index');
