@@ -10,27 +10,33 @@
         <div class="col-md-10">
             <div class="container">
                 <div class="row mt-4">
+                    @include('elements.messages')
                     <div class="col-md-6 border-end">
                         <h2 class="app-text-bold app-text-muted">Datos</h2>
-                        <form class="mr-3">
+                        <form class="mr-3" action="{{route('user.update', $user->id)}}" method="POST">
+                            @method('PUT')
+                            @csrf
                             <div class="mb-3">
                               <label class="form-label">Nombre</label>
-                              <input type="text" class="form-control">
+                              <input type="text" name="first_name" class="form-control" value="{{old('first_name', $user->first_name)}}">
                             </div>
                             <div class="mb-3">
                               <label class="form-label">Apellido</label>
-                              <input type="text" class="form-control">
+                              <input type="text" name="last_name" class="form-control" value="{{old('last_name', $user->last_name)}}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control">
+                                <input type="email" name="email" class="form-control" value="{{old('email', $user->email)}}">
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar cambios</button>
                         </form>
                     </div>
                     <div class="col-md-6">
                         <h2 class="app-text-bold app-text-muted">Cambiar contraseña</h2>
-                        <form class="ml-3">
+                        <div class="container">
+                            <a href="/password/reset">Establecer nueva contraseña</a>
+                        </div>
+                        {{-- <form class="ml-3">
                             <div class="mb-3">
                               <label class="form-label">Contraseña antigua</label>
                               <input type="password" class="form-control">
@@ -44,7 +50,7 @@
                                 <input type="password" class="form-control">
                               </div>
                             <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>

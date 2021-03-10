@@ -23,12 +23,6 @@
                     <div class="app-logo">
                         <img src="{{asset('assets/images/logomvt-blanco.png')}}">
                     </div>
-                    {{-- <div id="clock">
-                        <div id="time">
-                            <h1><span id="hours">00</span>:<span id="minutes">00</span> <span style="font-size: .7em" id="phase">AM</span></h1>
-                            <span>{{\Carbon\Carbon::now()->format('l jS \\of F') }}</span>
-                        </div>
-                    </div> --}}
                 </div>
                 <h2 class="panel-title">{{$pagename}}</h2>
             </div>

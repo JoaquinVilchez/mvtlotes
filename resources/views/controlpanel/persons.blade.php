@@ -18,40 +18,32 @@
                                         <label class="visually-hidden">Name</label>
                                         <input type="text" class="form-control" placeholder="Buscar">
                                 </div>
-                              </form>
+                            </form>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="d-flex justify-content-between align-items-center mt-4">
-                        <table class="table table-sm table-hover" id="personsTable">
-                            <thead>
-                                <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="table table-sm table-hover" id="personsTable">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Apellidos y nombres</th>
+                                    <th scope="col">Lote</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($persons as $person)
+                                        <tr>
+                                            <td>{{$person->code}}</td>
+                                            <td>{{$person->displayName()}}</td>
+                                            <td>@if($person->result) <span class="badge bg-success">LOTE {{$person->result->lot->lot_number}}</span> @else NO @endif</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                     </div>
+                    {{$persons->links()}}
                 </div>
             </div>
         </div>

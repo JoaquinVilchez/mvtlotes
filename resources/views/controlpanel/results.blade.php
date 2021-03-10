@@ -10,11 +10,13 @@
         <div class="col-md-10">
             <div class="container">
                 <div class="row mt-4">
-                    <div class="d-flex justify-content-end align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="messages">
+                            @include('elements.messages')
+                        </div>
                         <div class="search-form">
                             <form class="row row-cols-lg-auto g-3 align-items-center">
                                 <div class="col-12">
-                                        <label class="visually-hidden">Name</label>
                                         <input type="text" class="form-control" placeholder="Buscar">
                                 </div>
                               </form>
@@ -31,36 +33,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1234</td>
-                                    <td>PEREZ RODRIGUEZ, Juan Ignacio</td>
-                                    <td><i class="bi bi-trash"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>1234</td>
-                                    <td>PEREZ RODRIGUEZ, Juan Ignacio</td>
-                                    <td><i class="bi bi-trash"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>1234</td>
-                                    <td>PEREZ RODRIGUEZ, Juan Ignacio</td>
-                                    <td><i class="bi bi-trash"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>1234</td>
-                                    <td>PEREZ RODRIGUEZ, Juan Ignacio</td>
-                                    <td><i class="bi bi-trash"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>1234</td>
-                                    <td>PEREZ RODRIGUEZ, Juan Ignacio</td>
-                                    <td><i class="bi bi-trash"></i></td>
-                                </tr>
+                                @foreach ($results as $result)
+                                    <tr>
+                                        <td>{{$result->lot->lot_number}}</td>
+                                        <td>{{$result->person->code}}</td>
+                                        <td>{{$result->person->displayName()}}</td>
+                                        <td>
+                                            <button type="button" data-resultid="{{$result->id}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteResultModal">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -69,12 +53,46 @@
         </div>
     </div>
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteResultModal" tabindex="-1" aria-labelledby="deleteResultModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteResultModal">Eliminar resultado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{route('lottery.destroy')}}" method="POST">
+            @csrf
+            <div class="modal-body" style="text-align: center">
+                <h5>¡Estás a punto de eliminar un resultado!</h5>
+                <p style="font-size: .85em">Esta acción es irreversible.<br>¿Estás seguro de realizar esta acción?</p>
+                <input name="resultid" type="hidden" id="resultid" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger">Sí, estoy seguro</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('js-script')
-    <script>
-        $(document).ready( function () {
-            $('#personsTable').DataTable();
-        } );
-    </script>
+<script>
+
+    var myModal = document.getElementById('deleteResultModal')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        var button = $(event.relatedTarget)
+
+        var resultid = button.data('resultid')
+        var modal = $(this)
+
+        modal.find('.modal-body #resultid').val(resultid)
+    })
+
+</script>
 @endsection

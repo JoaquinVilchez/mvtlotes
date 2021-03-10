@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => false]);
 
+Route::get('/sorteo', 'App\Http\Controllers\LotteryController@create')->name('lottery.create');
+Route::post('/sorteo/registrar', 'App\Http\Controllers\LotteryController@store')->name('lottery.store');
+Route::get('/resultados', 'App\Http\Controllers\LotteryController@show')->name('lottery.show');
+Route::post('/resultado/eliminar', 'App\Http\Controllers\LotteryController@destroy')->name('lottery.destroy');
+
 Route::get('/home', function () {
     return redirect()->route('screen.index');
 })->name('home');
@@ -27,21 +32,10 @@ Route::get('/pantalla', function () {
     return view('controlpanel.screen')->with('pagename', 'Pantalla');
 })->name('screen.index');
 
-Route::get('/miperfil', function () {
-    return view('controlpanel.myprofile')->with('pagename', 'Mi perfil');
-})->name('myprofile.index');
+Route::get('/miperfil', 'App\Http\Controllers\UserController@index')->name('user.index');
+Route::put('/usuario/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
 
-Route::get('/personas', function () {
-    return view('controlpanel.persons')->with('pagename', 'Personas');
-})->name('person.index');
-
-Route::get('/sorteo', function () {
-    return view('controlpanel.lottery')->with('pagename', 'Sorteos');
-})->name('lottery.index');
-
-Route::get('/resultados', function () {
-    return view('controlpanel.results')->with('pagename', 'Resultados');
-})->name('result.index');
+Route::get('/personas', 'App\Http\Controllers\PersonController@index')->name('person.index');
 
 Route::get('/salida', function () {
     return view('output.index')->with('pagename', 'Sorteo General');

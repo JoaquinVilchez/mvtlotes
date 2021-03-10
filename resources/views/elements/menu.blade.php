@@ -11,13 +11,13 @@
             Pantalla
         </div>
     </a>
-    <a href="{{route('lottery.index')}}" class="btn btn-light panel-menu-button">
+    <a href="{{route('lottery.create')}}" class="btn btn-light panel-menu-button">
         <div class="d-flex justify-content-center align-items-center flex-column">
             <i class="bi bi-plus-circle" style="font-size:30px"></i>
             Sorteos
         </div>
     </a>
-    <a href="{{route('result.index')}}" class="btn btn-light panel-menu-button">
+    <a href="{{route('lottery.show')}}" class="btn btn-light panel-menu-button">
         <div class="d-flex justify-content-center align-items-center flex-column">
             <i class="bi bi-trophy" style="font-size:30px"></i>
             Resultados
@@ -29,7 +29,7 @@
             Personas
         </div>
     </a>
-    <a href="{{route('myprofile.index')}}" class="btn btn-light panel-menu-button">
+    <a href="{{route('user.index')}}" class="btn btn-light panel-menu-button">
         <div class="d-flex justify-content-center align-items-center flex-column">
             <i class="bi bi-person-circle" style="font-size:30px"></i>
             Mi perfil
