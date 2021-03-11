@@ -25,7 +25,10 @@ class PersonFactory extends Factory
             'code' => $this->faker->unique()->numerify(),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'mothers_last_name' => $this->faker->lastName()
+            'mothers_last_name' => $this->faker->lastName(),
+            'dni' => strval($this->faker->unique()->randomNumber($nbDigits = 8)),
+            'group' => '1',
+            'type' => 'general'
         ];
     }
 }

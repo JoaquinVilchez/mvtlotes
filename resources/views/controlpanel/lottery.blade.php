@@ -15,6 +15,24 @@
                         <h2 class="app-text-bold app-text-muted">Asignar ganador</h2>
                         <form action="{{route('lottery.store')}}" method="post" class="mr-3">
                             @csrf
+                            <div class="form-row mb-3">
+                                <div class="col">
+                                    <label class="form-label">Grupo</label>
+                                    <select name="lottery_type" class="form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Tipo de sorteo</label>
+                                    <select name="lottery_type" class="form-control">
+                                        <option value="cpd">CPD</option>
+                                        <option value="general">General</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="mb-3">
                               <label class="form-label">Lote</label>
                               <select name="lot" class="form-control">
@@ -37,7 +55,7 @@
                                 <select name="person" class="form-control">
                                         <option value="" selected disabled>Seleccione una persona ({{$persons->count()}} disponibles)</option>
                                     @foreach ($persons as $person)
-                                        <option value="{{$person->id}}">{{$person->code}} - {{$person->displayName()}}</option>
+                                        <option value="{{$person->id}}">{{$person->code}} - {{$person->displayName()}} @if($person->type=='cpd') (CPD) @endif</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -47,6 +65,7 @@
                     </div>
                     <div class="col-md-6">
                         <h2 class="app-text-bold app-text-muted">Lotes</h2>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <div class="lot-map">
                             @for ($i = 1; $i < 48; $i++)
                                 <button type="button" class="lot 

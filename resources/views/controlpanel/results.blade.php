@@ -28,18 +28,24 @@
                                 <table class="table table-sm table-hover" id="personsTable">
                                     <thead>
                                         <tr>
+                                        <th scope="col">Grupo</th>
+                                        <th scope="col">Tipo</th>
                                         <th scope="col">Lote</th>
                                         <th scope="col">Número</th>
                                         <th scope="col">Apellidos y nombres</th>
+                                        <th scope="col">DNI</th>
                                         <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($results as $result)
                                             <tr>
+                                                <td>{{$result->person->group}}</td>
+                                                <td>{{strtoupper($result->person->type)}}</td>
                                                 <td>{{$result->lot->lot_number}}</td>
                                                 <td>{{$result->person->code}}</td>
-                                                <td>{{$result->person->displayName()}}</td>
+                                                <td>{{$result->person->displayName()}}</td></td>
+                                                <td>{{$result->person->dni}}</td>
                                                 <td>
                                                     <a href='#' data-resultid="{{$result->id}}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteResultModal">
                                                         <i class="bi bi-trash"></i>
