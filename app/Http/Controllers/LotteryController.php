@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Person;
 use App\Models\Result;
+use App\Models\Lot;
 
 class LotteryController extends Controller
 {
@@ -32,10 +33,16 @@ class LotteryController extends Controller
                 return $value;
             }
         });
+        $results = Result::all();
+        $raffledLots = array();
+        foreach ($results as $result) {
+            array_push($raffledLots, $result->lot->id);
+        }
 
         return view('controlpanel.lottery')->with([
             'pagename' => 'Sorteos',
             'persons' => $availablePersons,
+            'raffledLots' => $raffledLots
         ]);
     }
 

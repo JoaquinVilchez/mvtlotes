@@ -13,7 +13,7 @@
                     @include('elements.messages')
                 </div>
                 <div class="row mb-3">
-                    <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div class="col-md-6 pl-0">
                             <form action="{{route('lot.update', $lot->id)}}" method="POST" enctype="multipart/form-data" >
                                 @method('PUT')
@@ -25,15 +25,17 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Grupo</label>
-                                    <select name="group" class="form-select">
+                                    <select name="group" class="form-control">
                                         @for ($i = 1; $i < 5; $i++)
                                             <option value="{{$i}}" @if($lot->group==$i) selected @endif>Grupo {{$i}}</option>
                                         @endfor
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Imágen</label>
-                                    <input class="form-control" name="image" type="file" id="formFile">
+                                <div class="input-group mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Imágen</label>
+                                        <input type="file" class="form-control-file" name="image" type="file" id="formFile">
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-block btn-primary">Guardar cambios</button>
                             </form>

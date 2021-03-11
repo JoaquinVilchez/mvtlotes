@@ -10,44 +10,50 @@
         <div class="col-md-10">
             <div class="container">
                 <div class="row mt-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="messages">
-                            @include('elements.messages')
+                    <div class="col-md-12">
+                        @if ($results->count()>0)
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="messages">
+                                @include('elements.messages')
+                            </div>
+                            <div class="search-form">
+                                <form class="row row-cols-lg-auto align-items-center">
+                                    <div class="col-12">
+                                            <input type="text" class="form-control" placeholder="Buscar">
+                                    </div>
+                                  </form>
+                            </div>
                         </div>
-                        <div class="search-form">
-                            <form class="row row-cols-lg-auto g-3 align-items-center">
-                                <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Buscar">
-                                </div>
-                              </form>
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                                <table class="table table-sm table-hover" id="personsTable">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Lote</th>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Apellidos y nombres</th>
+                                        <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($results as $result)
+                                            <tr>
+                                                <td>{{$result->lot->lot_number}}</td>
+                                                <td>{{$result->person->code}}</td>
+                                                <td>{{$result->person->displayName()}}</td>
+                                                <td>
+                                                    <a href='#' data-resultid="{{$result->id}}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteResultModal">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center mt-4">
-                        <table class="table table-sm table-hover" id="personsTable">
-                            <thead>
-                                <tr>
-                                <th scope="col">Lote</th>
-                                <th scope="col">Número</th>
-                                <th scope="col">Apellidos y nombres</th>
-                                <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($results as $result)
-                                    <tr>
-                                        <td>{{$result->lot->lot_number}}</td>
-                                        <td>{{$result->person->code}}</td>
-                                        <td>{{$result->person->displayName()}}</td>
-                                        <td>
-                                            <button type="button" data-resultid="{{$result->id}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteResultModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    @else
+                        <h2>Todavía no hay resultados</h2>
+                    @endif
                 </div>
             </div>
         </div>
@@ -83,16 +89,14 @@
 @section('js-script')
 <script>
 
-    var myModal = document.getElementById('deleteResultModal')
-
-    myModal.addEventListener('shown.bs.modal', function () {
+    $('#deleteResultModal').on('show.bs.modal', function(event){
         var button = $(event.relatedTarget)
 
         var resultid = button.data('resultid')
         var modal = $(this)
 
         modal.find('.modal-body #resultid').val(resultid)
-    })
 
+    })
 </script>
 @endsection

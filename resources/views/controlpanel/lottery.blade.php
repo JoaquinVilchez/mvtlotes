@@ -17,7 +17,7 @@
                             @csrf
                             <div class="mb-3">
                               <label class="form-label">Lote</label>
-                              <select name="lot" class="form-select">
+                              <select name="lot" class="form-control">
                                 @for ($i = 1; $i < 48; $i++)
                                     <option value="{{$i}}" 
 
@@ -34,7 +34,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Ganador</label>
-                                <select name="person" class="form-select">
+                                <select name="person" class="form-control">
                                         <option value="" selected disabled>Seleccione una persona ({{$persons->count()}} disponibles)</option>
                                     @foreach ($persons as $person)
                                         <option value="{{$person->id}}">{{$person->code}} - {{$person->displayName()}}</option>
@@ -50,7 +50,7 @@
                         <div class="lot-map">
                             @for ($i = 1; $i < 48; $i++)
                                 <button type="button" class="lot 
-                                @if($i < getLotteryCount()+1)
+                                @if($i == getLotteryCount()+1)
                                     disabled
                                 @elseif($i == getLotteryCount()+1)
                                     active
@@ -66,13 +66,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('js-script')
-    <script>
-        $(document).ready( function () {
-            // $('.selectpicker').selectpicker();
-            // $('#personsTable').DataTable();
-        } );
-    </script>
 @endsection
