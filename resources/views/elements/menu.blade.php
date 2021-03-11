@@ -29,6 +29,12 @@
             Personas
         </div>
     </a>
+    <a href="{{route('lot.index')}}" class="btn btn-light panel-menu-button">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <i class="bi bi-border-outer" style="font-size:30px"></i>
+            Lotes
+        </div>
+    </a>
     <a href="{{route('user.index')}}" class="btn btn-light panel-menu-button">
         <div class="d-flex justify-content-center align-items-center flex-column">
             <i class="bi bi-person-circle" style="font-size:30px"></i>

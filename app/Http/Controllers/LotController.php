@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class LotController extends Controller
 {
@@ -13,7 +16,11 @@ class LotController extends Controller
      */
     public function index()
     {
-        //
+        $lots = Lot::all();
+        return view('controlpanel.lots')->with([
+            'lots' => $lots,
+            'pagename' => 'Lotes'
+        ]);
     }
 
     /**
@@ -56,7 +63,11 @@ class LotController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lot = Lot::find($id);
+        return view('controlpanel.editlot')->with([
+            'pagename' => 'Editar lote',
+            'lot' => $lot
+        ]);
     }
 
     /**
@@ -68,7 +79,31 @@ class LotController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $lot = Lot::find($id);
+
+            if ($request->hasFile('image')) {
+                if ($lot->image != 'noimage') {
+                    File::delete(public_path('assets/images/plans/' . $lot->image));
+                }
+                $file = $request->file('image');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/images/plans'), $filename);
+
+                $lot->update([
+                    'group' => $request->group,
+                    'image' => $filename
+                ]);
+            } else {
+                $lot->update([
+                    'group' => $request->group
+                ]);
+            }
+
+            return redirect()->route('lot.index')->with('success_message', 'Lote editado con éxito');
+        } catch (\Throwable $th) {
+            return redirect()->route('lot.index')->with('success_error', 'El lote no se pudo editar');
+        }
     }
 
     /**

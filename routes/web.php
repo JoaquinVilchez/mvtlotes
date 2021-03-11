@@ -21,8 +21,13 @@ Auth::routes(['verify' => false]);
 
 Route::get('/sorteo', 'App\Http\Controllers\LotteryController@create')->name('lottery.create');
 Route::post('/sorteo/registrar', 'App\Http\Controllers\LotteryController@store')->name('lottery.store');
+
 Route::get('/resultados', 'App\Http\Controllers\LotteryController@show')->name('lottery.show');
 Route::post('/resultado/eliminar', 'App\Http\Controllers\LotteryController@destroy')->name('lottery.destroy');
+
+Route::get('/lotes', 'App\Http\Controllers\LotController@index')->name('lot.index');
+Route::get('/lote/editar/{id}', 'App\Http\Controllers\LotController@edit')->name('lot.edit');
+Route::put('/lote/editar/{id}', 'App\Http\Controllers\LotController@update')->name('lot.update');
 
 Route::get('/home', function () {
     return redirect()->route('screen.index');

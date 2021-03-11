@@ -15,4 +15,9 @@ class Lot extends Model
     {
         return $this->belongsTo(Person::class);
     }
+
+    public function result()
+    {
+        return $this->hasOne(Result::class);
+    }
 }
