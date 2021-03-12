@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\PlacaGeneral;
+use App\Events\ProximoSorteo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,3 +47,7 @@ Route::get('/personas', 'App\Http\Controllers\PersonController@index')->name('pe
 Route::get('/salida', function () {
     return view('output.index')->with('pagename', 'Sorteo General');
 })->name('output.index')->middleware('auth');
+
+Route::get('/opcion1', 'App\Http\Controllers\EventController@placaGeneral')->name('output.placageneral');
+
+Route::get('/opcion2', 'App\Http\Controllers\EventController@proximoSorteo')->name('output.proximosorteo');

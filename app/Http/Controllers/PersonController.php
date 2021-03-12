@@ -14,7 +14,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $persons = Person::paginate(50);
+        $persons = Person::all();
         return view('controlpanel.persons')->with([
             'pagename' => 'Personas',
             'persons' => $persons

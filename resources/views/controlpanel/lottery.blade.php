@@ -52,7 +52,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Ganador</label>
-                                <select name="person" class="form-control">
+                                <select name="person" class="selectpicker" data-live-search="true" data-width="100%">
                                         <option value="" selected disabled>Seleccione una persona ({{$persons->count()}} disponibles)</option>
                                     @foreach ($persons as $person)
                                         <option value="{{$person->id}}">{{$person->code}} - {{$person->displayName()}} @if($person->type=='cpd') (CPD) @endif</option>
@@ -85,4 +85,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js-script')
+    <script>
+        $('.selectpicker').selectpicker();
+    </script>
 @endsection

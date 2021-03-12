@@ -12,7 +12,7 @@
                 <div class="row mt-4">
                     <div class="col-md-12">
 
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
                                 <table class="table table-sm table-hover" id="personsTable">
                                     <thead>
                                         <tr>
@@ -38,7 +38,7 @@
                                     </tbody>
                                 </table>
                         </div>
-                        {{$persons->links()}}
+                        {{-- {{$persons->links()}} --}}
                     </div>
                 </div>
             </div>
@@ -50,7 +50,9 @@
 @section('js-script')
     <script>
         $(document).ready( function () {
-            $('#personsTable').DataTable();
-        } );
+            $('#personsTable').DataTable({
+                language: {url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'}
+            });
+        });
     </script>
 @endsection

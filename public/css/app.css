@@ -1,20 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 @charset "UTF-8";
-@font-face {
-    font-family: "Chaco";
-    src: url("public/assets/fonts/Chaco/Chaco Black.otf") format("otf");
-    src: url("public/assets/fonts/Chaco/Chaco Bold.otf") format("otf");
-    src: url("public/assets/fonts/Chaco/Chaco Light.otf") format("otf");
-    src: url("public/assets/fonts/Chaco/Chaco Medium.otf") format("otf");
-    src: url("public/assets/fonts/Chaco/Chaco Thin.otf") format("otf");
-}
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-
 :root {
     --blue: #3490dc;
     --indigo: #6574cd;
@@ -51,11 +42,10 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    font-family: "Chaco";
 }
 
 html {
-    font-family: "Chaco", sans-serif;
+    font-family: sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -76,7 +66,7 @@ section {
 
 body {
     margin: 0;
-    font-family: "Chaco", sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.6;
@@ -10439,13 +10429,6 @@ a.text-dark:focus {
     border-radius: 15px;
 }
 
-.panel-output-button {
-    height: 150px;
-    width: 250px;
-    margin: 5px;
-    font-size: 28px;
-}
-
 .panel-header {
     background-color: #0091b3;
     color: white;
@@ -10459,6 +10442,10 @@ a.text-dark:focus {
     font-family: "Chaco";
     font-weight: 600;
     margin-bottom: 0px;
+}
+
+* {
+    font-family: "Chaco";
 }
 
 #clock {
@@ -10579,4 +10566,46 @@ a.text-dark:focus {
     -webkit-box-shadow: 0px 24px 68px -47px rgba(0, 0, 0, 0.58);
     -moz-box-shadow: 0px 24px 68px -47px rgba(0, 0, 0, 0.58);
     box-shadow: 0px 24px 68px -47px rgba(0, 0, 0, 0.58);
+}
+
+/* Botón propio
+-------------------------------------------------- */
+
+/* Redefine los estilos de .btn */
+/* Modificar el texto y el color de fondo en los tres estados
+   principales del botón: default, hover y active. */
+.btn-mvt-screen {
+    height: 150px;
+    width: 250px;
+    margin: 5px;
+    font-size: 28px;
+    color: black;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    border: 1px solid rgb(236, 236, 236);
+}
+
+.btn-mvt-screen.active {
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #1fa700;
+}
+
+/* Aplicar gradientes de colores */
+/* Nota: no se muestran aquí todos los gradientes que tendrás que
+      definir para los diferentes navegadores. */
+.btn-mvt-screen {
+    background-repeat: repeat-x;
+    background-image: linear-gradient(top, #009ed2 0%, #007da7 100%);
+}
+
+/* Estilos del estado :hover del botón */
+/* Uno de los estilos más sencillos y eficaces para el estado :hover
+      consiste en subir hacia arriba ligeramente la imagen de fondo del
+      botón, pero puedes definir otros estilos adicionales si quieres. */
+.btn-mvt-screen:hover {
+    background-position: 0 -15px;
+}
+
+.panel-output-button {
 }
