@@ -17,8 +17,8 @@ class PersonLot extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('person');
             $table->foreign('person')->references('id')->on('persons');
-            $table->unsignedBigInteger('lot');
-            $table->foreign('lot')->references('id')->on('lots');
+            $table->unsignedBigInteger('lot')->nullable();
+            $table->foreign('lot')->references('id')->on('lots')->nullable();
             $table->string('type');
             $table->string('status')->default('active');
         });

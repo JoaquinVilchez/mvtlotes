@@ -1,8 +1,13 @@
 <?php
 
-use App\Models\Result;
-
-function getLotteryCount()
+function translate($text)
 {
-    return count(Result::all());
+    switch ($text) {
+        case 'headline':
+            return 'titular';
+            break;
+        case 'alternate':
+            return 'suplente';
+            break;
+    }
 }

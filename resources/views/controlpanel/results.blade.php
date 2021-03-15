@@ -16,20 +16,14 @@
                             <div class="messages">
                                 @include('elements.messages')
                             </div>
-                            <div class="search-form">
-                                <form class="row row-cols-lg-auto align-items-center">
-                                    <div class="col-12">
-                                            <input type="text" class="form-control" placeholder="Buscar">
-                                    </div>
-                                  </form>
-                            </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mt-4">
-                                <table class="table table-sm table-hover" id="personsTable">
+                                <table class="table table-sm table-hover" id="resultsTable">
                                     <thead>
                                         <tr>
                                         <th scope="col">Grupo</th>
-                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Tipo de sorteo</th>
+                                        <th scope="col">Tipo de ganador</th>
                                         <th scope="col">Lote</th>
                                         <th scope="col">Número</th>
                                         <th scope="col">Apellidos y nombres</th>
@@ -41,8 +35,9 @@
                                         @foreach ($results as $result)
                                             <tr>
                                                 <td>{{$result->person->group}}</td>
-                                                <td>{{strtoupper($result->person->type)}}</td>
-                                                <td>{{$result->lot->lot_number}}</td>
+                                                <td>{{strtoupper($result->lottery_type)}}</td>
+                                                <td>{{ucfirst(translate($result->winner_type))}}</td>
+                                                <td>@if($result->winner_type=='headline') {{$result->lot->lot_number}} @else - @endif</td>
                                                 <td>{{$result->person->code}}</td>
                                                 <td>{{$result->person->displayName()}}</td></td>
                                                 <td>{{$result->person->dni}}</td>
@@ -94,6 +89,12 @@
 
 @section('js-script')
 <script>
+    $(document).ready( function () {
+            $('#resultsTable').DataTable({
+                language: {url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'}, 
+                "order": [[ 3, "asc" ]]
+            });
+    });
 
     $('#deleteResultModal').on('show.bs.modal', function(event){
         var button = $(event.relatedTarget)

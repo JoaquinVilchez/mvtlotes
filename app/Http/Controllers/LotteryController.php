@@ -27,22 +27,11 @@ class LotteryController extends Controller
      */
     public function create()
     {
-        $persons = Person::all();
-        $availablePersons = $persons->filter(function ($value, $key) {
-            if (!$value->result) {
-                return $value;
-            }
-        });
-        $results = Result::all();
-        $raffledLots = array();
-        foreach ($results as $result) {
-            array_push($raffledLots, $result->lot->id);
-        }
+        $results = Result::orderBy('id', 'desc')->take(5)->get();
 
         return view('controlpanel.lottery')->with([
             'pagename' => 'Sorteos',
-            'persons' => $availablePersons,
-            'raffledLots' => $raffledLots
+            'results' => $results
         ]);
     }
 
@@ -54,13 +43,101 @@ class LotteryController extends Controller
      */
     public function store(Request $request)
     {
-        Result::create([
-            'person_id' => $request->person,
-            'lot_id' => $request->lot,
-            'type' => 'titular'
+
+        // VALIDAR QUE SI YA SE ASIGNO UNA PERSONA TITULAR A UN LOTE, NO SE PUEDE VOLVER A ASIGNAR AL MISMO. EL LOTE ASIGNADO DEBE APARECER COMO DISABLED EN EL SELECT
+        if ($request->winner_type == 'headline') {
+            $lotValidation = 'required';
+        } elseif ($request->winner_type == 'alternate') {
+            $lotValidation = 'nullable';
+        }
+
+        $request->validate([
+            'group' => 'required',
+            'lottery_type' => 'required',
+            'winner_type' => 'required',
+            'lot' => $lotValidation,
+            'person' => 'required',
         ]);
 
-        return redirect()->route('lottery.create')->with('success_message', 'Sorteo registrado con éxito');
+        $validationData = [
+            'cpd' => [
+                1 => [
+                    'headline' => 1,
+                    'alternate' => 2
+                ],
+                2 => [
+                    'headline' => 1,
+                    'alternate' => 2
+                ],
+                3 => [
+                    'headline' => 3,
+                    'alternate' => 6
+                ],
+            ],
+            'general' => [
+                1 => [
+                    'headline' => 36,
+                    'alternate' => 72
+                ],
+                2 => [
+                    'headline' => 46,
+                    'alternate' => 92
+                ],
+                3 => [
+                    'headline' => 24,
+                    'alternate' => 48
+                ],
+            ]
+        ];
+
+        $headlines = DB::table('results')
+            ->join('persons', 'results.person_id', '=', 'persons.id')
+            ->where('persons.group', $request->group)
+            ->where('results.winner_type', 'headline')
+            ->count();
+
+        $alternates = DB::table('results')
+            ->join('persons', 'results.person_id', '=', 'persons.id')
+            ->where('persons.group', $request->group)
+            ->where('results.winner_type', 'alternate')
+            ->count();
+
+        $validation = $validationData[$request->lottery_type][$request->group][$request->winner_type];
+
+        if ($request->winner_type == 'headline') {
+
+            $result = Result::where('lot_id', $request->lot)->where('winner_type', 'headline')->get();
+            if ($result->isEmpty()) {
+                if ($headlines < $validation) {
+                    $response = true;
+                    $lot_id = $request->lot;
+                } else {
+                    $response = false;
+                }
+            } else {
+                $response = false;
+            }
+        } elseif ($request->winner_type == 'alternate') {
+            if ($alternates < $validation) {
+                $response = true;
+                $lot_id = null;
+            } else {
+                $response = false;
+            }
+        }
+
+        if ($response) {
+            Result::create([
+                'person_id' => $request->person,
+                'lot_id' => $lot_id,
+                'lottery_type' => $request->lottery_type,
+                'winner_type' => $request->winner_type,
+            ]);
+
+            return redirect()->route('lottery.create')->with('success_message', 'Sorteo registrado con éxito');
+        } else {
+            return redirect()->route('lottery.create')->with('error_message', 'Ya no se puede registrar mas un ' . translate($request->winner_type));
+        }
     }
 
     /**
@@ -117,5 +194,40 @@ class LotteryController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('lottery.show')->with('error_message', 'El resultado no se pudo eliminar');
         }
+    }
+
+    public function getLots(Request $request)
+    {
+        $lots = Lot::where('group', $request->group)->where('lottery_type', $request->lottery_type)->get();
+
+        $lots = $lots->filter(function ($value, $key) {
+            if (!$value->result) {
+                return $value;
+            }
+        });
+
+        return response()->json($lots);
+    }
+
+    public function getPersons(Request $request)
+    {
+
+        if ($request->lottery_type == 'general') {
+            $persons = Person::where('group', $request->group)->get();
+            $persons = $persons->filter(function ($value, $key) {
+                if (!$value->result || $value->result->winner_type == 'alternate') {
+                    return $value;
+                }
+            });
+        } elseif ($request->lottery_type == 'cpd') {
+            $persons = Person::where('group', $request->group)->where('type', $request->lottery_type)->get();
+            $persons = $persons->filter(function ($value, $key) {
+                if (!$value->result) {
+                    return $value;
+                }
+            });
+        }
+
+        return response()->json($persons);
     }
 }

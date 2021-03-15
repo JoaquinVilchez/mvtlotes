@@ -26,7 +26,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Grupo</label>
                                     <select name="group" class="form-control">
-                                        @for ($i = 1; $i < 5; $i++)
+                                        @for ($i = 1; $i < 4; $i++)
                                             <option value="{{$i}}" @if($lot->group==$i) selected @endif>Grupo {{$i}}</option>
                                         @endfor
                                     </select>

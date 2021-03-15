@@ -32,7 +32,14 @@
                                                 <td>{{$person->dni}}</td>
                                                 <td>{{$person->group}}</td>
                                                 <td>{{strtoupper($person->type)}}</td>
-                                                <td>@if($person->result) <span class="badge badge-success">LOTE {{$person->result->lot->lot_number}}</span> @else NO @endif</td>
+                                                {{-- {{dd($person->result)}} --}}
+                                                <td>@if($person->result!=null) 
+                                                    @if($person->result->lot_id != null) <span class="badge badge-success">LOTE {{$person->result->lot_id}}</span>
+                                                    @else <span class="badge badge-primary">Suplente</span>
+                                                    @endif
+                                                    @else NO
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -51,7 +58,8 @@
     <script>
         $(document).ready( function () {
             $('#personsTable').DataTable({
-                language: {url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'}
+                language: {url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'},
+                "order": [[ 0, "asc" ]]
             });
         });
     </script>

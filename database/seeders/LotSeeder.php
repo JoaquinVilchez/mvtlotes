@@ -14,19 +14,35 @@ class LotSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 48; $i++) {
-            $group = 1;
-            if ($i >= 10 && $i < 20) {
+        for ($i = 1; $i < 112; $i++) {
+            $denomination = strval('Nombre lote ' . $i);
+            if ($i <= 37) {
+                $group = 1;
+                $lottery_type = 'cpd';
+                if ($i > 1) {
+                    $lottery_type = 'general';
+                }
+            } elseif ($i > 37 && $i <= 84) {
                 $group = 2;
-            } elseif ($i >= 20 && $i < 30) {
+                $lottery_type = 'cpd';
+                if ($i > 38) {
+                    $lottery_type = 'general';
+                }
+            } elseif ($i > 84 && $i <= 111) {
                 $group = 3;
-            } elseif ($i >= 30) {
-                $group = 4;
+                $lottery_type = 'cpd';
+                if ($i > 87) {
+                    $lottery_type = 'general';
+                }
             }
+
+            // dump($i, $group, $lottery_type);
 
             Lot::create([
                 'lot_number' => $i,
-                'group' => $group
+                'group' => $group,
+                'lottery_type' => $lottery_type,
+                'denomination' => $denomination
             ]);
         }
     }

@@ -76,108 +76,63 @@
     <div id="option4">
         <div class="output-header mb-2 p-1">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="d-flex justify-content-between align-items-center my-4">
-                            <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo">
-                            <h2 class="panel-title">Resultado lote 15</h2>
-                        </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12" style="text-align: center">
+                        <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo">
+                        <hr style="background-color:white">
+                        <h2 class="my-2 app-text-bold">Sorteo general</h2>
                     </div>
                 </div>
             </div>
         </div>
-    
+
         <div class="container">
-            <div class="row my-0">
-                <div class="col-md-2 px-0 offset-md-2">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">LOTE</p>
-                            <p class="app-text-black my-0">15</p>
-                        </div>
-                    </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6" style="text-align: center">
+                    <h2 class="app-text-bold">Próximo sorteo</h2>
+                    <p style="font-size: 2em">Grupo 1 - Lote 5</p>
+                    <img src="{{asset('assets/images/plano.png')}}" class="rounded border float-end" width="65%">
                 </div>
-                <div class="col-md-6 px-0">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">1234</p>
-                            <p class="app-text-black my-0">PEREZ RODRIGUEZ, Juan Ignacio</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row my-0">
-                <div class="col-md-2 px-0 offset-md-2">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">LOTE</p>
-                            <p class="app-text-black my-0">14</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 px-0">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">1234</p>
-                            <p class="app-text-black my-0">PEREZ RODRIGUEZ, Juan Ignacio</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row my-0">
-                <div class="col-md-2 px-0 offset-md-2">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">LOTE</p>
-                            <p class="app-text-black my-0">13</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 px-0">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">1234</p>
-                            <p class="app-text-black my-0">PEREZ RODRIGUEZ, Juan Ignacio</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row my-0">
-                <div class="col-md-2 px-0 offset-md-2">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">LOTE</p>
-                            <p class="app-text-black my-0">12</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 px-0">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">1234</p>
-                            <p class="app-text-black my-0">PEREZ RODRIGUEZ, Juan Ignacio</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row my-0">
-                <div class="col-md-2 px-0 offset-md-2">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">LOTE</p>
-                            <p class="app-text-black my-0">11</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 px-0">
-                    <div class="card my-1 mx-1">
-                        <div class="card-body output4-card-winner py-1">
-                            <p class="app-text-black my-0">1234</p>
-                            <p class="app-text-black my-0">PEREZ RODRIGUEZ, Juan Ignacio</p>
-                        </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <h2 class="app-text-bold">Últimos 5 ganadores</h2>
+
+                        <table class="table table-striped" style="font-size:1.5em">
+                            <thead>
+                                <tr>
+                                <th scope="col">LOTE</th>
+                                <th scope="col">NÚMERO</th>
+                                <th scope="col">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>577</td>
+                                    <td>RODRIGUEZ, LAURA</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>125</td>
+                                    <td>PEREZ LOPEZ, JUAN</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>511</td>
+                                    <td>CASTINO, ANA</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>172</td>
+                                    <td>LANDASIO, JORGE</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>511</td>
+                                    <td>MARTINEZ RODRIGUEZ, OSCAR ANTONIO</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -189,7 +144,10 @@
 
 <script>
     $( document ).ready(function() {
-        showOption1();
+        $('#option1').hide();
+        $('#option2').hide();
+        $('#option3').hide();
+        // $('#option4').fadeOut();
     });
 
     window.laravelEchoPort = '{{env("LARAVEL_ECHO_PORT")}}';
