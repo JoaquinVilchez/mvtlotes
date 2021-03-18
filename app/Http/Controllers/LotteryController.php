@@ -114,6 +114,7 @@ class LotteryController extends Controller
                 if ($headlines < $validation) {
                     $response = true;
                     $lot_id = $request->lot;
+                    $order_number = null;
                 } else {
                     $response = false;
                 }
@@ -124,6 +125,21 @@ class LotteryController extends Controller
             if ($alternates < $validation) {
                 $response = true;
                 $lot_id = null;
+
+                $last_order_number = DB::table('results')
+                    ->join('persons', 'results.person_id', '=', 'persons.id')
+                    ->where('persons.group', $request->group)
+                    ->where('results.winner_type', 'alternate')
+                    ->where('results.lottery_type', $request->lottery_type)
+                    ->orderBy('results.created_at', 'desc')->first('order_number');
+
+                if ($last_order_number != null) {
+                    $last_order_number = $last_order_number->order_number;
+                } else {
+                    $last_order_number = 0;
+                }
+
+                $order_number = $last_order_number + 1;
             } else {
                 $response = false;
             }
@@ -132,6 +148,7 @@ class LotteryController extends Controller
         if ($response) {
             Result::create([
                 'person_id' => $request->person,
+                'order_number' => $order_number,
                 'lot_id' => $lot_id,
                 'lottery_type' => $request->lottery_type,
                 'winner_type' => $request->winner_type,

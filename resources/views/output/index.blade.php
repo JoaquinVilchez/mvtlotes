@@ -206,8 +206,18 @@
 
         if (data.winner_type=='headline') {
             $('#winner_type_text').text("TITULARES");
+            $(".screenResultTable > tbody > tr").remove()
+            $.each(data.results[0], function(key,value) {
+                var row = $("<tr><td>"+value.lot_number+"/"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+                $(".screenResultTable > tbody").append(row);
+            })
         }else{
             $('#winner_type_text').text("SUPLENTES");
+            $(".screenResultTable > tbody > tr").remove()
+            $.each(data.results[0], function(key,value) {
+                var row = $("<tr><td>"+value.order_number+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+                $(".screenResultTable > tbody").append(row);
+            })
         }
 
         $('#group_text').text('GRUPO '+data.group)
@@ -230,11 +240,6 @@
             $('#results_table_container').find('.row').addClass('d-flex justify-content-center')
         }
 
-        $(".screenResultTable > tbody > tr").remove()
-        $.each(data.results[0], function(key,value) {
-            var row = $("<tr><td>"+value.lot_number+"/"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
-            $(".screenResultTable > tbody").append(row);
-        })
         showOption4();
     });
 
