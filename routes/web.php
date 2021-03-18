@@ -53,5 +53,5 @@ Route::get('/salida', function () {
 })->name('output.index')->middleware('auth');
 
 Route::get('/opcion1', 'App\Http\Controllers\EventController@placaGeneral')->name('output.placageneral');
-
 Route::get('/opcion2', 'App\Http\Controllers\EventController@proximoSorteo')->name('output.proximosorteo');
+Route::post('/opcion4', 'App\Http\Controllers\EventController@ultimos5Ganadores')->name('output.ultimos5Ganadores');

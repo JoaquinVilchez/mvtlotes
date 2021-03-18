@@ -10532,7 +10532,7 @@ a.text-dark:focus {
 }
 
 .output1-logo {
-    width: 300px;
+    width: 250px;
 }
 
 .output1-title {
@@ -10541,7 +10541,7 @@ a.text-dark:focus {
 }
 
 .output2-logo {
-    width: 150px;
+    width: 200px;
 }
 
 .output2-plan {
@@ -10575,13 +10575,13 @@ a.text-dark:focus {
 /* Modificar el texto y el color de fondo en los tres estados
    principales del botón: default, hover y active. */
 .btn-mvt-screen {
-    height: 150px;
-    width: 250px;
+    height: 100px;
+    min-width: 100;
     margin: 5px;
-    font-size: 28px;
-    color: black;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-color: #ffffff;
+    background-color: #353535;
     border: 1px solid rgb(236, 236, 236);
 }
 
@@ -10604,8 +10604,6 @@ a.text-dark:focus {
       consiste en subir hacia arriba ligeramente la imagen de fondo del
       botón, pero puedes definir otros estilos adicionales si quieres. */
 .btn-mvt-screen:hover {
-    background-position: 0 -15px;
-}
-
-.panel-output-button {
+    color: rgb(255, 255, 255);
+    background-color: #015000;
 }

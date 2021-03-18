@@ -21,26 +21,26 @@
                                 <table class="table table-sm table-hover" id="resultsTable">
                                     <thead>
                                         <tr>
+                                        <th hidden></th>
                                         <th scope="col">Grupo</th>
                                         <th scope="col">Tipo de sorteo</th>
                                         <th scope="col">Tipo de ganador</th>
                                         <th scope="col">Lote</th>
                                         <th scope="col">Número</th>
                                         <th scope="col">Apellidos y nombres</th>
-                                        <th scope="col">DNI</th>
                                         <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($results as $result)
                                             <tr>
+                                                <td hidden>{{$result->created_at}}</td>
                                                 <td>{{$result->person->group}}</td>
                                                 <td>{{strtoupper($result->lottery_type)}}</td>
                                                 <td>{{ucfirst(translate($result->winner_type))}}</td>
-                                                <td>@if($result->winner_type=='headline') {{$result->lot->lot_number}} @else - @endif</td>
+                                                <td>@if($result->winner_type=='headline') {{$result->lot->getFullName()}} @else - @endif</td>
                                                 <td>{{$result->person->code}}</td>
                                                 <td>{{$result->person->displayName()}}</td></td>
-                                                <td>{{$result->person->dni}}</td>
                                                 <td>
                                                     <a href='#' data-resultid="{{$result->id}}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteResultModal">
                                                         <i class="bi bi-trash"></i>
@@ -92,7 +92,7 @@
     $(document).ready( function () {
             $('#resultsTable').DataTable({
                 language: {url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'}, 
-                "order": [[ 3, "asc" ]]
+                "order": [[ 0, "desc" ]]
             });
     });
 

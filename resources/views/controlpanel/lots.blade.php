@@ -16,7 +16,6 @@
                             <thead>
                                 <tr>
                                 <th hidden></th>
-                                <th scope="col">Número</th>
                                 <th scope="col">Denominación</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Tipo</th>
@@ -29,8 +28,7 @@
                                 @foreach ($lots as $lot)
                                     <tr>
                                         <td hidden>{{$lot->id}}</td>
-                                        <td>LOTE {{$lot->lot_number}}</td>
-                                        <td>{{$lot->denomination}}</td>
+                                        <td>{{$lot->getFullName()}}</td>
                                         <td>{{$lot->group}}</td>
                                         <td>@if($lot->result) {{ucfirst($lot->result->lottery_type)}}@endif</td>
                                         <td>@if($lot->result){{ $lot->result->person->displayName() }} @else - @endif</td>

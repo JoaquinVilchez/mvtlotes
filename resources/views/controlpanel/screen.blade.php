@@ -8,10 +8,41 @@
             @include('elements.menu')
         </div>
         <div class="col-md-10">
-            <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="placaGeneral()" id="option1">Placa general</button>
-            <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="proximoSorteo()" id="option2">Próximo sorteo</button>
-            <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" id="option1">Último ganador</button>
-            <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" id="option1">Últimos 5 ganadores</button>
+            <div class="row">
+                <div class="d-flex align-items-center">
+                    <h1 class="mx-4">PNT</h1>
+                </div>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="placaGeneral()" id="option1">Logo MVT</button>
+                {{-- <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="proximoSorteo()" id="option2">Próximo sorteo</button> --}}
+            </div>
+            <hr>
+            <div class="row">
+                <div class="d-flex align-items-center">
+                    <h1 class="mx-4">CPD</h1>
+                </div>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 1)" id="option3">TITULARES <br>CPD - GRP 1</button>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 1)" id="option3">SUPLENTES <br>CPD - GRP 1</button>
+                <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 2)" id="option3">TITULARES <br>CPD - GRP 2</button>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 2)" id="option3">SUPLENTES <br>CPD - GRP 2</button>
+                <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 3)" id="option3">TITULARES <br>CPD - GRP 3</button>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 3)" id="option3">SUPLENTES <br>CPD - GRP 3</button>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="d-flex align-items-center">
+                    <h1 class="mx-4">GRL</h1>
+                </div>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 1)" id="option4">TITULARES <br>GRL - GRP 1</button>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 1)" id="option3">SUPLENTES <br>GRL - GRP 1</button>
+                <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 2)" id="option4">TITULARES <br>GRL - GRP 2</button>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 2)" id="option3">SUPLENTES <br>GRL - GRP 2</button>
+                <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 3)" id="option4">TITULARES <br>GRL - GRP 3</button>
+                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 3)" id="option3">SUPLENTES <br>GRL - GRP 3</button>
+            </div>
         </div>
     </div>
 </div>
@@ -27,11 +58,13 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success:function(data){
-                $('#option2').removeClass('active')
                 $('#option1').addClass('active')
+                $('#option2').removeClass('active')
+                $('#option3').removeClass('active')
+                $('#option4').removeClass('active')
             },
             error:function(data){
-                console.log('Mal')
+                console.log('ERROR')
             }
         });
     }
@@ -46,9 +79,11 @@
             success:function(data){
                 $('#option1').removeClass('active')
                 $('#option2').addClass('active')
+                $('#option3').removeClass('active')
+                $('#option4').removeClass('active')
             },
             error:function(data){
-                console.log('Mal')
+                console.log('ERROR')
             }
         });
     }

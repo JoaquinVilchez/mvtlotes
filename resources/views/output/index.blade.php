@@ -5,8 +5,10 @@
 </div>
     <div id="option1">
             <div class="d-flex justify-content-center align-items-center flex-column vh-100">
-                <h1 class="output-title">Sorteo general</h1>
-                <span><img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo"></span>
+                <div class="row">
+                    <img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo mx-4 animate__bounceIn">
+                    <img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo mx-4 animate__bounceIn">
+                </div>
             </div>
     </div>
     
@@ -74,30 +76,33 @@
     </div>
     
     <div id="option4">
-        <div class="output-header mb-2 p-1">
+        <div class="output-header mb-2 pt-4">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12" style="text-align: center">
-                        <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo">
+                        <div class="row d-flex justify-content-center">
+                            <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo mx-4">
+                            <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo mx-4">
+                        </div>
                         <hr style="background-color:white">
-                        <h2 class="my-2 app-text-bold">Sorteo general</h2>
+                        <h2 class="my-2 app-text-bold"><span id="lottery_type_text"></span> - <span id="winner_type_text"></span></h2>
+                        <h2 id="group_text"></h2>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6" style="text-align: center">
+        <div class="container" id="headlines">
+            <div class="row d-flex justify-content-center mt-2">
+                <div class="col-md-5" style="text-align: center" id="next_lot_container">
                     <h2 class="app-text-bold">Próximo sorteo</h2>
-                    <p style="font-size: 2em">Grupo 1 - Lote 5</p>
-                    <img src="{{asset('assets/images/plano.png')}}" class="rounded border float-end" width="65%">
+                    <p style="font-size: 2em"><span id="next_lot_text"></span></p>
+                    <img src="" class="rounded border float-end" width="100%" id="next_lot_img">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7" id="results_table_container">
                     <div class="row">
-                        <h2 class="app-text-bold">Últimos 5 ganadores</h2>
-
-                        <table class="table table-striped" style="font-size:1.5em">
+                        <h2 class="app-text-bold last_winners_text"></h2>
+                        <table class="table table-striped screenResultTable" style="font-size:1.5em">
                             <thead>
                                 <tr>
                                 <th scope="col">LOTE</th>
@@ -106,31 +111,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="alternates">
+            <div class="row d-flex justify-content-center mt-2">
+                <div class="col-md-8 offset-md-2s">
+                    <div class="row">
+                        <h2 class="app-text-bold last_winners_text"></h2>
+
+                        <table class="table table-striped screenResultTable" style="font-size:1.5em">
+                            <thead>
                                 <tr>
-                                    <td>1</td>
-                                    <td>577</td>
-                                    <td>RODRIGUEZ, LAURA</td>
+                                <th scope="col">NRO ORDEN</th>
+                                <th scope="col">NÚMERO</th>
+                                <th scope="col">NOMBRE</th>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>125</td>
-                                    <td>PEREZ LOPEZ, JUAN</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>511</td>
-                                    <td>CASTINO, ANA</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>172</td>
-                                    <td>LANDASIO, JORGE</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>511</td>
-                                    <td>MARTINEZ RODRIGUEZ, OSCAR ANTONIO</td>
-                                </tr>
+                            </thead>
+                            <tbody>
+
                             </tbody>
                         </table>
                     </div>
@@ -144,10 +148,10 @@
 
 <script>
     $( document ).ready(function() {
-        $('#option1').hide();
+        $('#option1').show();
         $('#option2').hide();
         $('#option3').hide();
-        // $('#option4').fadeOut();
+        $('#option4').hide();
     });
 
     window.laravelEchoPort = '{{env("LARAVEL_ECHO_PORT")}}';
@@ -159,7 +163,6 @@
     window.Echo.channel('placa-general-channel')
     .listen('.MessageEvent', (data)=>{
         showOption1();
-        // $('#output').append('<div class="alert alert-danger"> PLACA PRINCIPAL: '+data.message+'</div>');
     });
 
     window.Echo.channel('proximo-sorteo-channel')
@@ -167,9 +170,74 @@
         console.log(data);
         showOption2();
     });
-</script>
 
-<script>
+    window.Echo.channel('ultimos-5-channel')
+    .listen('.MessageEvent', (data)=>{
+        console.log(data)
+
+        if(data.winner_type=='headline'){
+            $('#alternates').hide();
+            $('#headlines').show();
+        }else if(data.winner_type=='alternate'){
+            $('#alternates').show();
+            $('#headlines').hide();
+            $('#alternates').find('.row').addClass('d-flex justify-content-center')
+        }
+
+        ///////////////////////////////
+
+        if(data.results[0].length==1){
+            $('#results_table_container').show();
+            $('.last_winners_text').text('Último ganador')
+        }else if(data.results[0].length>0){
+            $('.last_winners_text').text('Últimos '+data.results[0].length+' ganadores')
+            $('#results_table_container').show();
+        }else if(data.results[0].length==0){
+            $('#results_table_container').hide();
+
+            $('.last_winners_text').text('Sin resultados')
+        }
+
+        if (data.lottery_type=='general') {
+            $('#lottery_type_text').text("SORTEO GENERAL");
+        }else if(data.lottery_type=='cpd'){
+            $('#lottery_type_text').text("SORTEO CPD");
+        }
+
+        if (data.winner_type=='headline') {
+            $('#winner_type_text').text("TITULARES");
+        }else{
+            $('#winner_type_text').text("SUPLENTES");
+        }
+
+        $('#group_text').text('GRUPO '+data.group)
+
+        if(data.next_lot!=null){
+            $('#next_lot_container').show();
+            $('#results_table_container').removeClass('col-md-8').addClass('col-md-7');
+            var next_lot_image;
+            $('#next_lot_text').text('LOTE '+data.next_lot.lot_number+' - '+data.next_lot.denomination)
+            if(data.next_lot.image=='noimage'){
+                next_lot_image = 'noimage.png';
+            }else{  
+                next_lot_image = data.next_lot.image
+            }
+            var path = `{{asset('assets/images/plans/${next_lot_image}')}}`
+            $('#next_lot_img').attr('src', path)
+        }else{
+            $('#next_lot_container').hide();
+            $('#results_table_container').removeClass('col-md-7').addClass('col-md-8');
+            $('#results_table_container').find('.row').addClass('d-flex justify-content-center')
+        }
+
+        $(".screenResultTable > tbody > tr").remove()
+        $.each(data.results[0], function(key,value) {
+            var row = $("<tr><td>"+value.lot_number+"/"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+            $(".screenResultTable > tbody").append(row);
+        })
+        showOption4();
+    });
+
     function showOption1(){
         $('#option1').fadeOut();
         $('#option2').fadeOut();
@@ -186,6 +254,15 @@
         $('#option4').fadeOut();
 
         $('#option2').fadeIn();
+    }
+
+    function showOption4(){
+        $('#option1').fadeOut();
+        $('#option2').fadeOut();
+        $('#option3').fadeOut();
+        $('#option4').fadeOut();
+
+        $('#option4').fadeIn();
     }
 </script>
 

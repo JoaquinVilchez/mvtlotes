@@ -44,6 +44,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-es_ES.min.js"></script>
+    {{-- Animate.css --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    
+    @yield('css-script')
 
 
 </head>
@@ -54,12 +59,34 @@
         </main>
     </div>
 
-    <script>
-            var url = window.location.pathname;
-            var parts = url.split('/');
-            pagename = parts[1]
-            activeButton = $('#'+pagename).addClass('active')
-    </script>
+<script>
+        var url = window.location.pathname;
+        var parts = url.split('/');
+        pagename = parts[1]
+        activeButton = $('#'+pagename).addClass('active')
+
+        function ultimos5Ganadores(winner_type, lottery_type, group){
+        $.ajax({
+            url : '{{route("output.ultimos5Ganadores")}}',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data:{winner_type:winner_type, lottery_type:lottery_type, group:group},
+            success:function(data){
+                $('#option1').removeClass('active')
+                $('#option2').removeClass('active')
+                $('#option3').removeClass('active')
+                $('#option4').addClass('active')
+            },
+            error:function(data){
+                console.log(data)
+            }
+        });
+    }
+</script>
+
+
 
 @yield('js-script')
 </body>

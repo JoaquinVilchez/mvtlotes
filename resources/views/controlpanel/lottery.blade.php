@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('css-script')
+    <style>
+        .selectpicker{
+            border: 1px solid red;
+        }
+    </style>
+@endsection
+
 @section('content')
 @include('elements.header')
 <div class="container">
@@ -13,7 +21,7 @@
                     <div class="col-md-6 border-end">
                         @include('elements.messages')
                         <h2 class="app-text-bold app-text-muted">Asignar ganador</h2>
-                        <form action="{{route('lottery.store')}}" method="post" class="mr-3">
+                        <form action="{{route('lottery.store')}}" method="post" class="mr-3" id="LotteryForm">
                             @csrf
                             <div class="form-row mb-3">
                                 <div class="col">
@@ -28,7 +36,7 @@
                                 </div>
                                 <div class="col">
                                     <label class="form-label">Tipo de sorteo</label>
-                                    <select name="lottery_type" class="form-control" id="lottery_type-select">>
+                                    <select name="lottery_type" class="form-control" id="lottery_type-select">
                                         <option value="general">General</option>
                                         <option value="cpd">CPD</option>
                                     </select>
@@ -38,7 +46,7 @@
                             <div class="form-row mb-3">
                                 <div class="col">
                                     <label class="form-label">Tipo de ganador</label>
-                                    <select name="winner_type" class="form-control" id="winner-select">>
+                                    <select name="winner_type" class="form-control" id="winner-select">
                                         <option value="headline">Titular</option>
                                         <option value="alternate">Suplente</option>
                                     </select>
@@ -118,9 +126,8 @@
                     data:{group:group,lottery_type:lottery_type},
                     success:function(data){
                         $('#lot-select').empty();
-                        $('#lot-select').append(`<option value="">Seleccione un lote</option>`)
                         $.each(data, function (index, value) {
-                            $('#lot-select').append(`<option value="${value.id}">${value.denomination}</option>`)
+                            $('#lot-select').append(`<option value="${value.id}">${value.lot_number} - ${value.denomination}</option>`)
                         })
                     },
                     error: function(data) {

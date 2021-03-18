@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Ultimos5;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Person;
@@ -94,18 +95,20 @@ class LotteryController extends Controller
             ->join('persons', 'results.person_id', '=', 'persons.id')
             ->where('persons.group', $request->group)
             ->where('results.winner_type', 'headline')
+            ->where('results.lottery_type', $request->lottery_type)
             ->count();
 
         $alternates = DB::table('results')
             ->join('persons', 'results.person_id', '=', 'persons.id')
             ->where('persons.group', $request->group)
             ->where('results.winner_type', 'alternate')
+            ->where('results.lottery_type', $request->lottery_type)
             ->count();
 
         $validation = $validationData[$request->lottery_type][$request->group][$request->winner_type];
 
-        if ($request->winner_type == 'headline') {
 
+        if ($request->winner_type == 'headline') {
             $result = Result::where('lot_id', $request->lot)->where('winner_type', 'headline')->get();
             if ($result->isEmpty()) {
                 if ($headlines < $validation) {
@@ -133,6 +136,8 @@ class LotteryController extends Controller
                 'lottery_type' => $request->lottery_type,
                 'winner_type' => $request->winner_type,
             ]);
+
+            updateOutputData($request->group, $request->lottery_type, $request->winner_type);
 
             return redirect()->route('lottery.create')->with('success_message', 'Sorteo registrado con éxito');
         } else {
