@@ -6,7 +6,7 @@
     <div id="option1">
             <div class="d-flex justify-content-center align-items-center flex-column vh-100">
                 <div class="row">
-                    <img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo mx-4 animate__bounceIn">
+                    <img src="{{asset('assets/images/logo_nuestroterreno.png')}}" class="output1-logo mx-4 animate__bounceIn">
                     <img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo mx-4 animate__bounceIn">
                 </div>
             </div>
@@ -76,17 +76,19 @@
     </div>
     
     <div id="option4">
-        <div class="output-header mb-2 pt-4">
-            <div class="container">
+        <div class="output-header mb-2">
+            <div class="container-fluid">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12" style="text-align: center">
-                        <div class="row d-flex justify-content-center">
-                            <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo mx-4">
-                            <img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo mx-4">
+                        <div class="row d-flex justify-content-between align-items-center mx-4">
+                            <div><img src="{{asset('assets/images/logonuestroterreno-negro.png')}}" style="width: 250px" class="output2-logo mx-4"></div>
+                            <div>
+                                <h1 class="my-2 app-text-bold"><span id="lottery_type_text"></span> - <span id="winner_type_text"></span></h1>
+                                <h1 id="group_text"></h1>
+                            </div>
+                            <div><img src="{{asset('assets/images/logomvt-negro.png')}}" class="output2-logo mx-4"></div>
                         </div>
-                        <hr style="background-color:white">
-                        <h2 class="my-2 app-text-bold"><span id="lottery_type_text"></span> - <span id="winner_type_text"></span></h2>
-                        <h2 id="group_text"></h2>
+                        {{-- <hr style="background-color:white"> --}}
                     </div>
                 </div>
             </div>
@@ -167,13 +169,16 @@
 
     window.Echo.channel('proximo-sorteo-channel')
     .listen('.MessageEvent', (data)=>{
-        console.log(data);
         showOption2();
     });
 
     window.Echo.channel('ultimos-5-channel')
     .listen('.MessageEvent', (data)=>{
-        console.log(data)
+
+        $('.output-header').removeClass('group1');
+        $('.output-header').removeClass('group2');
+        $('.output-header').removeClass('group3');
+        $('.output-header').addClass('group'+data.group);
 
         if(data.winner_type=='headline'){
             $('#alternates').hide();

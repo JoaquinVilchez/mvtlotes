@@ -20,28 +20,28 @@
                 <div class="d-flex align-items-center">
                     <h1 class="mx-4">CPD</h1>
                 </div>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 1)" id="option3">TITULARES <br>CPD - GRP 1</button>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 1)" id="option3">SUPLENTES <br>CPD - GRP 1</button>
+                <button type="button" class="btn btn-mvt-screen" id="headline-cpd-1" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 1); activeButton('headline', 'cpd', 1)">TITULARES <br>CPD - GRP 1</button>
+                <button type="button" class="btn btn-mvt-screen" id="alternate-cpd-1" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 1); activeButton('alternate', 'cpd', 1);">SUPLENTES <br>CPD - GRP 1</button>
                 <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 2)" id="option3">TITULARES <br>CPD - GRP 2</button>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 2)" id="option3">SUPLENTES <br>CPD - GRP 2</button>
+                <button type="button" class="btn btn-mvt-screen" id="headline-cpd-2" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 2); activeButton('headline', 'cpd', 2)">TITULARES <br>CPD - GRP 2</button>
+                <button type="button" class="btn btn-mvt-screen" id="alternate-cpd-2" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 2); activeButton('alternate', 'cpd', 2)">SUPLENTES <br>CPD - GRP 2</button>
                 <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 3)" id="option3">TITULARES <br>CPD - GRP 3</button>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 3)" id="option3">SUPLENTES <br>CPD - GRP 3</button>
+                <button type="button" class="btn btn-mvt-screen" id="headline-cpd-3" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'cpd', 3); activeButton('headline', 'cpd', 3)">TITULARES <br>CPD - GRP 3</button>
+                <button type="button" class="btn btn-mvt-screen" id="alternate-cpd-3" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'cpd', 3); activeButton('alternate', 'cpd', 3)">SUPLENTES <br>CPD - GRP 3</button>
             </div>
             <hr>
             <div class="row">
                 <div class="d-flex align-items-center">
                     <h1 class="mx-4">GRL</h1>
                 </div>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 1)" id="option4">TITULARES <br>GRL - GRP 1</button>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 1)" id="option3">SUPLENTES <br>GRL - GRP 1</button>
+                <button type="button" class="btn btn-mvt-screen" id="headline-general-1" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 1); activeButton('headline', 'general', 1)">TITULARES <br>GRL - GRP 1</button>
+                <button type="button" class="btn btn-mvt-screen" id="alternate-general-1" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 1); activeButton('alternate', 'general', 1)">SUPLENTES <br>GRL - GRP 1</button>
                 <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 2)" id="option4">TITULARES <br>GRL - GRP 2</button>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 2)" id="option3">SUPLENTES <br>GRL - GRP 2</button>
+                <button type="button" class="btn btn-mvt-screen" id="headline-general-2" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 2); activeButton('headline', 'general', 2)">TITULARES <br>GRL - GRP 2</button>
+                <button type="button" class="btn btn-mvt-screen" id="alternate-general-2" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 2); activeButton('alternate', 'general', 2)">SUPLENTES <br>GRL - GRP 2</button>
                 <span class="mx-2" style="border-left: 2px solid grey; height: 110px"></span>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 3)" id="option4">TITULARES <br>GRL - GRP 3</button>
-                <button type="button" class="btn btn-mvt-screen" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 3)" id="option3">SUPLENTES <br>GRL - GRP 3</button>
+                <button type="button" class="btn btn-mvt-screen" id="headline-general-3" data-bs-toggle="button" onclick="ultimos5Ganadores('headline', 'general', 3); activeButton('headline', 'general', 3)">TITULARES <br>GRL - GRP 3</button>
+                <button type="button" class="btn btn-mvt-screen" id="alternate-general-3" data-bs-toggle="button" onclick="ultimos5Ganadores('alternate', 'general', 3); activeButton('alternate', 'general', 3)">SUPLENTES <br>GRL - GRP 3</button>
             </div>
         </div>
     </div>
@@ -58,10 +58,8 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success:function(data){
+                $('#option1').removeClass('active')
                 $('#option1').addClass('active')
-                $('#option2').removeClass('active')
-                $('#option3').removeClass('active')
-                $('#option4').removeClass('active')
             },
             error:function(data){
                 console.log('ERROR')
@@ -77,15 +75,18 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success:function(data){
-                $('#option1').removeClass('active')
-                $('#option2').addClass('active')
-                $('#option3').removeClass('active')
-                $('#option4').removeClass('active')
+                $('.btn-mvt-screen').removeClass('active')
+                $('.btn-mvt-screen').addClass('active')
             },
             error:function(data){
                 console.log('ERROR')
             }
         });
+    }
+
+    function activeButton(winner_type, lottery_type, group){
+        $('.btn-mvt-screen').removeClass('active')
+        $('#'+winner_type+'-'+lottery_type+'-'+group).addClass('active')
     }
 </script>
 @endsection

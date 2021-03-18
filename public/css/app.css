@@ -10525,14 +10525,27 @@ a.text-dark:focus {
 
 .output-header {
     background-color: #0091b3;
-    color: white;
+    color: #030000;
     min-height: 200px;
     display: flex;
     align-items: center;
 }
 
+.output-header.group1 {
+    background-color: #0ce0e3;
+}
+
+.output-header.group2 {
+    background-color: #fdde0a;
+}
+
+.output-header.group3 {
+    background-color: #fd0f5b;
+}
+
 .output1-logo {
-    width: 250px;
+    width: 300px;
+    height: auto;
 }
 
 .output1-title {
