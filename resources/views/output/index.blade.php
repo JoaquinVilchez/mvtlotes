@@ -33,9 +33,10 @@
         <div id="congratulations">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="row my-5">
-                    <div class="card animate__zoomIn" id="winner-card">
-                        <div class="card-body">
-                          <h1 class="app-text-bold" id="winner-name"></h1>
+                    <div class="card animate__zoomIn mx-2" id="winner-card">
+                        <div class="card-body" style="font-size: 50px; text-align:center; font-weight:800">
+                            🎉 ¡Felicitaciones! 🎉<br>
+                          <p id="winner-name"></p>
                         </div>
                     </div>
                 </div>
@@ -127,7 +128,7 @@
             $('#option2').show();
             $('#results').hide();
             $('#congratulations').fadeIn(500);
-            $('#winner-name').text(`🎉 ¡Felicitaciones ${data.results[0][0].last_name} ${data.results[0][0].mothers_last_name}, ${data.results[0][0].first_name}! 🎉`)
+            $('#winner-name').text(`${data.results[0][0].last_name} ${data.results[0][0].mothers_last_name}, ${data.results[0][0].first_name}`)
             setTimeout(function() {
                 $('#congratulations').fadeOut(500);
                 $('#results').show();
