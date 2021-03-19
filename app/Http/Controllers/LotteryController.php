@@ -106,7 +106,7 @@ class LotteryController extends Controller
             ->count();
 
         $validation = $validationData[$request->lottery_type][$request->group][$request->winner_type];
-
+        $isNew = false;
 
         if ($request->winner_type == 'headline') {
             $result = Result::where('lot_id', $request->lot)->where('winner_type', 'headline')->get();
@@ -115,6 +115,7 @@ class LotteryController extends Controller
                     $response = true;
                     $lot_id = $request->lot;
                     $order_number = null;
+                    $isNew = true;
                 } else {
                     $response = false;
                 }
@@ -154,7 +155,7 @@ class LotteryController extends Controller
                 'winner_type' => $request->winner_type,
             ]);
 
-            updateOutputData($request->group, $request->lottery_type, $request->winner_type);
+            updateOutputData($request->group, $request->lottery_type, $request->winner_type, $isNew);
 
             return redirect()->route('lottery.create')->with('success_message', 'Sorteo registrado con éxito');
         } else {

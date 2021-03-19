@@ -17,7 +17,7 @@ function translate($text)
 }
 
 
-function updateOutputData($group, $lottery_type, $winner_type)
+function updateOutputData($group, $lottery_type, $winner_type, $isNew)
 {
     $results = DB::table('results')
         ->join('persons', 'results.person_id', '=', 'persons.id')
@@ -37,5 +37,5 @@ function updateOutputData($group, $lottery_type, $winner_type)
     }
 
     $results = array($results);
-    event(new Ultimos5($results, $nextLot, $group, $winner_type, $lottery_type));
+    event(new Ultimos5($results, $nextLot, $group, $winner_type, $lottery_type, $isNew));
 }

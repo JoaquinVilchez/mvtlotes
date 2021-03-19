@@ -25,6 +25,6 @@ class EventController extends Controller
 
     public function ultimos5Ganadores(Request $request)
     {
-        updateOutputData($request->group, $request->lottery_type, $request->winner_type);
+        updateOutputData($request->group, $request->lottery_type, $request->winner_type, false);
     }
 }

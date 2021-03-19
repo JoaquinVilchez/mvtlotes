@@ -84,11 +84,11 @@ class LotController extends Controller
 
             if ($request->hasFile('image')) {
                 if ($lot->image != 'noimage') {
-                    File::delete(public_path('assets/images/plans/' . $lot->image));
+                    File::delete(public_path('assets/images/lots/' . $lot->image));
                 }
                 $file = $request->file('image');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('assets/images/plans'), $filename);
+                $filename = $lot->denomination[0] . '/' . trim($lot->lot_number) . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/images/lots/'), $filename);
 
                 $lot->update([
                     'group' => $request->group,

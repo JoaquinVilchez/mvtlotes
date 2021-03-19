@@ -44,7 +44,7 @@
                                 @if($lot->image=='noimage')
                                     <img src="{{asset('assets/images/noimage.png')}}" class="rounded border float-start" width="100%">
                                 @else
-                                    <img src="{{asset('assets/images/plans/'.$lot->image)}}" class="rounded border float-start" width="100%">
+                                    <img src="{{asset('assets/images/lots/'.$lot->image)}}" class="rounded border float-start" width="100%">
                                 @endif
                         </div>
                     </div>

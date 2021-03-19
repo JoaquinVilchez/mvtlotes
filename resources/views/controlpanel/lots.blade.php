@@ -86,7 +86,8 @@
 
             var image = button.data('image')
             var modal = $(this)
-            var path = `{{asset('assets/images/plans/${image}')}}`
+            var path = `{{asset('assets/images/lots/${image}')}}`
+            console.log(path)
 
             modal.find('.modal-body #lotimage').attr("src",path)
         })

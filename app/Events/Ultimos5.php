@@ -20,18 +20,20 @@ class Ultimos5 implements ShouldBroadcast
     private $group;
     private $winner_type;
     private $lottery_type;
+    private $isNew;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($results, ?Lot $next_lot, $group, $winner_type, $lottery_type)
+    public function __construct($results, ?Lot $next_lot, $group, $winner_type, $lottery_type, $isNew)
     {
         $this->results = $results;
         $this->next_lot = $next_lot;
         $this->group = $group;
         $this->winner_type = $winner_type;
         $this->lottery_type = $lottery_type;
+        $this->isNew = $isNew;
     }
 
     /**
@@ -56,7 +58,8 @@ class Ultimos5 implements ShouldBroadcast
             'next_lot' => $this->next_lot,
             'group' => $this->group,
             'winner_type' => $this->winner_type,
-            'lottery_type' => $this->lottery_type
+            'lottery_type' => $this->lottery_type,
+            'is_new' => $this->isNew
         ];
     }
 }

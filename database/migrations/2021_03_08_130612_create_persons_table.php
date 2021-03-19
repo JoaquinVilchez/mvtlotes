@@ -17,7 +17,7 @@ class CreatePersonsTable extends Migration
             $table->bigIncrements('id');
             $table->string('code')->unique();
             $table->string('first_name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('mothers_last_name')->nullable();
             $table->timestamps();
         });
