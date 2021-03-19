@@ -20,6 +20,8 @@ function runConfetti(){
       , timer = undefined
       , frame = undefined
       , confetti = [];
+      let finishLoop = false;
+      setTimeout(()=>finishLoop=true, 10000)
   
     // Settings
     var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
@@ -206,6 +208,11 @@ function runConfetti(){
         // Start the loop
         var prev = undefined;
         requestAnimationFrame(function loop(timestamp) {
+          console.log(finishLoop);
+          if(finishLoop){
+            document.body.removeChild(container).fadeOut(500);
+            return 0
+          }
           var delta = prev ? timestamp - prev : 0;
           prev = timestamp;
           var height = $window.height();

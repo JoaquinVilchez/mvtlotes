@@ -123,14 +123,15 @@
         console.log(data);
 
         if(data.is_new==true){
+            runConfetti();
             $('#option2').show();
             $('#results').hide();
             $('#congratulations').fadeIn(500);
             $('#winner-name').text(`🎉 ¡Felicitaciones ${data.results[0][0].last_name} ${data.results[0][0].mothers_last_name}, ${data.results[0][0].first_name}! 🎉`)
             setTimeout(function() {
                 $('#congratulations').fadeOut(500);
-                $('#results').fadeIn(500);
-            },5000);
+                $('#results').show();
+            },10000);
             runTable();
         }else{
             $('#congratulations').hide();
