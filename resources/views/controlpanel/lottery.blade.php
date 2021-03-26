@@ -149,6 +149,7 @@
                     data:{group:group,lottery_type:lottery_type},
                     success:function(data){
                         $('#person-select').empty();
+                        $('#person-select').append(`<option value="">Seleccione una opcion</option>`)
                         $.each(data, function (index, value) {
                             $('#person-select').append(`<option value="${value.id}">${value.code} - ${value.last_name} ${value.mothers_last_name}, ${value.first_name} (${value.type.toUpperCase()})</option>`)
                         })

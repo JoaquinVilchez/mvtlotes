@@ -64,15 +64,15 @@ class LotteryController extends Controller
             'cpd' => [
                 1 => [
                     'headline' => 1,
-                    'alternate' => 2
+                    'alternate' => 3
                 ],
                 2 => [
                     'headline' => 1,
-                    'alternate' => 2
+                    'alternate' => 3
                 ],
                 3 => [
                     'headline' => 3,
-                    'alternate' => 6
+                    'alternate' => 9
                 ],
             ],
             'general' => [
@@ -238,7 +238,8 @@ class LotteryController extends Controller
         if ($request->lottery_type == 'general') {
             $persons = Person::where('group', $request->group)->get();
             $persons = $persons->filter(function ($value, $key) {
-                if (!$value->result || $value->result->winner_type == 'alternate') {
+                // || $value->result->winner_type == 'alternate'
+                if (!$value->result) {
                     return $value;
                 }
             });

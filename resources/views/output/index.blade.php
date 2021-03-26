@@ -34,7 +34,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <div class="row my-5">
                     <div class="card animate__zoomIn mx-2" id="winner-card">
-                        <div class="card-body" style="font-size: 50px; text-align:center; font-weight:800">
+                        <div class="card-body" style="font-size: 60px; text-align:center; font-weight:800">
                             🎉 ¡Felicitaciones! 🎉<br>
                           <p id="winner-name"></p>
                         </div>
@@ -51,14 +51,14 @@
                         <p style="font-size: 2em"><span id="next_lot_text"></span></p>
                         <img src="" class="rounded border float-end" width="100%" id="next_lot_img">
                     </div>
-                    <div class="col-md-7" id="results_table_container">
-                        <div class="row">
+                    <div class="col-md-7" id="results_table_container" style="text-align: center">
+
                             <h2 class="app-text-bold last_winners_text"></h2>
-                            <table class="table table-striped screenResultTable app-text-bold" style="font-size:1.5em">
+                            <table class="table table-striped screenResultTable app-text-bold" style="font-size:1.5em; text-align:center">
                                 <thead>
                                     <tr>
                                     <th scope="col">LOTE</th>
-                                    <th scope="col">NÚMERO</th>
+                                    <th scope="col">NRO</th>
                                     <th scope="col">NOMBRE</th>
                                     </tr>
                                 </thead>
@@ -66,7 +66,7 @@
     
                                 </tbody>
                             </table>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -77,11 +77,11 @@
                         <div class="row">
                             <h2 class="app-text-bold last_winners_text"></h2>
 
-                            <table class="table table-striped screenResultTable app-text-bold" style="font-size:1.5em">
+                            <table class="table table-striped screenResultTable app-text-bold" style="font-size:1.5em; text-align:center">
                                 <thead>
                                     <tr>
                                     <th scope="col">NRO ORDEN</th>
-                                    <th scope="col">NÚMERO</th>
+                                    <th scope="col">NRO</th>
                                     <th scope="col">NOMBRE</th>
                                     </tr>
                                 </thead>
@@ -179,14 +179,14 @@
                 $('#winner_type_text').text("TITULARES");
                 $(".screenResultTable > tbody > tr").remove()
                 $.each(data.results[0], function(key,value) {
-                    var row = $("<tr><td>"+value.lot_number+"/"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+                    var row = $("<tr class='py-0'><td>"+value.lot_number+"/"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
                     $(".screenResultTable > tbody").append(row);
                 })
             }else{
                 $('#winner_type_text').text("SUPLENTES");
                 $(".screenResultTable > tbody > tr").remove()
                 $.each(data.results[0], function(key,value) {
-                    var row = $("<tr><td>"+value.order_number+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+                    var row = $("<tr class='py-0'><td>"+value.order_number+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
                     $(".screenResultTable > tbody").append(row);
                 })
             }
