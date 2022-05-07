@@ -87,7 +87,7 @@ class LotController extends Controller
                     File::delete(public_path('assets/images/lots/' . $lot->image));
                 }
                 $file = $request->file('image');
-                $filename = $lot->denomination[0] . '/' . trim($lot->lot_number) . '.' . $file->getClientOriginalExtension();
+                $filename = $lot->denomination[0] . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('assets/images/lots/'), $filename);
 
                 $lot->update([

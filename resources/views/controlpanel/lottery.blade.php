@@ -31,6 +31,7 @@
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                     {!!$errors->first('group', '<small style="color:red"><i class="fas fa-exclamation-circle"></i> :message</small>') !!}
                                 </div>
@@ -127,7 +128,7 @@
                     success:function(data){
                         $('#lot-select').empty();
                         $.each(data, function (index, value) {
-                            $('#lot-select').append(`<option value="${value.id}">${value.lot_number} - ${value.denomination}</option>`)
+                            $('#lot-select').append(`<option value="${value.id}">${value.denomination}</option>`)
                         })
                     },
                     error: function(data) {
@@ -151,7 +152,7 @@
                         $('#person-select').empty();
                         $('#person-select').append(`<option value="">Seleccione una opcion</option>`)
                         $.each(data, function (index, value) {
-                            $('#person-select').append(`<option value="${value.id}">${value.code} - ${value.last_name} ${value.mothers_last_name}, ${value.first_name} (${value.type.toUpperCase()})</option>`)
+                            $('#person-select').append(`<option value="${value.id}">${value.code} - ${value.last_name}, ${value.first_name} (${value.type.toUpperCase()})</option>`)
                         })
                         $('.selectpicker').selectpicker('refresh');
                     },

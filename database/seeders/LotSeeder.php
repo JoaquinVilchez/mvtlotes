@@ -39,7 +39,6 @@ class LotSeeder extends Seeder
             // dump($i, $group, $lottery_type);
 
             Lot::create([
-                'lot_number' => $i,
                 'group' => $group,
                 'lottery_type' => $lottery_type,
                 'denomination' => $denomination

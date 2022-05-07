@@ -63,30 +63,38 @@ class LotteryController extends Controller
         $validationData = [
             'cpd' => [
                 1 => [
-                    'headline' => 1,
-                    'alternate' => 3
+                    'headline' => 2,
+                    'alternate' => 6
                 ],
                 2 => [
                     'headline' => 1,
                     'alternate' => 3
                 ],
                 3 => [
-                    'headline' => 3,
-                    'alternate' => 9
+                    'headline' => 1,
+                    'alternate' => 3
+                ],
+                4 => [
+                    'headline' => 1,
+                    'alternate' => 3
                 ],
             ],
             'general' => [
                 1 => [
-                    'headline' => 36,
-                    'alternate' => 72
+                    'headline' => 43,
+                    'alternate' => 43
                 ],
                 2 => [
-                    'headline' => 46,
-                    'alternate' => 92
+                    'headline' => 14,
+                    'alternate' => 14
                 ],
                 3 => [
-                    'headline' => 24,
-                    'alternate' => 48
+                    'headline' => 35,
+                    'alternate' => 35
+                ],
+                4 => [
+                    'headline' => 14,
+                    'alternate' => 14
                 ],
             ]
         ];

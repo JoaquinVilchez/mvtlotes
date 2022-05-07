@@ -60,12 +60,12 @@
     </div>
 
 <script>
-        var url = window.location.pathname;
-        var parts = url.split('/');
-        pagename = parts[1]
-        activeButton = $('#'+pagename).addClass('active')
+    var url = window.location.pathname;
+    var parts = url.split('/');
+    pagename = parts[1]
+    activeButton = $('#'+pagename).addClass('active')
 
-        function ultimos5Ganadores(winner_type, lottery_type, group){
+    function ultimos5Ganadores(winner_type, lottery_type, group){
         $.ajax({
             url : '{{route("output.ultimos5Ganadores")}}',
             type: 'POST',
@@ -83,6 +83,27 @@
                 console.log(data)
             }
         });
+    }
+
+    function proximoSorteo(lottery_type, group){
+    console.log(lottery_type, group)
+    $.ajax({
+        url : '{{route("output.proximosorteo")}}',
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        data:{lottery_type:lottery_type, group:group},
+        success:function(data){
+            console.log(data)
+            $('.btn-mvt-screen').removeClass('active')
+            $('.btn-mvt-screen').addClass('active')
+        },
+        error:function(data){
+            console.log(data)
+            console.log('ERROR')
+        }
+    });
     }
 </script>
 

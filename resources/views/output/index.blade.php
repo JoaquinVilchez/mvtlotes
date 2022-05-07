@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="output"></div>
+<div id="output">
     <div id="option1">
             <div class="d-flex justify-content-center align-items-center flex-column vh-100">
                 <div class="row">
-                    <img src="{{asset('assets/images/logo_nuestroterreno.png')}}" class="output1-logo mx-4 animate__bounceIn">
-                    <img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo mx-4 animate__bounceIn">
+                    <div class="col-12">
+                        <img src="{{asset('assets/images/logo_nuestroterreno.png')}}" class="output1-logo mx-4 animate__bounceIn">
+                        <img src="{{asset('assets/images/logomvt.png')}}" class="output1-logo mx-4 animate__bounceIn">
+                    </div>
                 </div>
             </div>
     </div>
@@ -43,58 +45,66 @@
             </div>
         </div>
 
-        <div id="results">
-            <div class="container" id="headlines">
+        {{-- RESULTADOS --}}
+        <div id="results" style="height: 50vh">
+            {{-- LISTADO DE TITULARES --}}
+            <div class="container m-auto" id="headlines">
                 <div class="row d-flex justify-content-center mt-2">
-                    <div class="col-md-5" style="text-align: center" id="next_lot_sidebar_container">
-                        <h2 class="app-text-bold">Próximo sorteo</h2>
-                        <p style="font-size: 2em"><span id="next_lot_text"></span></p>
-                        <img src="" class="rounded border float-end" width="100%" id="next_lot_img">
+                     <div class="col-12 mt-5" style="text-align: center" id="next_lot">
+                        <strong><p style="font-size: 4em" class="mb-0">PRÓXIMO LOTE</p></strong>
+                        <strong><p style="font-size: 6em"><span id="next_lot_text"></span></p></strong>
                     </div>
-                    <div class="col-md-7" id="results_table_container" style="text-align: center">
-
-                            <h2 class="app-text-bold last_winners_text"></h2>
-                            <table class="table table-striped screenResultTable app-text-bold" style="font-size:1.5em; text-align:center">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">LOTE</th>
-                                    <th scope="col">NRO</th>
-                                    <th scope="col">NOMBRE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-    
-                                </tbody>
-                            </table>
-
+                    <div class="col-12 mt-5" id="results_table_container">
+                        <h2 class="app-text-bold last_winners_text mb-4" style="font-size: 3em; text-align:center"></h2>
+                        <table class="table table-striped screenResultTable app-text-bold" style="font-size: 3em; text-align:center" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="font-size: .8em">LOTE</th>
+                                    <th scope="col" style="font-size: .8em">NRO</th>
+                                    <th scope="col" style="font-size: .8em">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <div class="container" id="alternates">
+            {{-- LISTADO DE SUPLENTES --}}
+            <div class="container m-auto" id="alternates">
                 <div class="row d-flex justify-content-center mt-2">
-                    <div class="col-md-8 offset-md-2s">
-                        <div class="row">
-                            <h2 class="app-text-bold last_winners_text"></h2>
+                    <div class="col-12 mt-5">
+                        <h2 style="font-size: 3em; text-align:center" class="app-text-bold last_winners_text mb-4"></h2>
+                        <table class="table table-striped screenResultTable app-text-bold" style="font-size:3em; text-align:center">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="font-size: .8em">NRO ORDEN</th>
+                                    <th scope="col" style="font-size: .8em">NRO</th>
+                                    <th scope="col" style="font-size: .8em">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <table class="table table-striped screenResultTable app-text-bold" style="font-size:1.5em; text-align:center">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">NRO ORDEN</th>
-                                    <th scope="col">NRO</th>
-                                    <th scope="col">NOMBRE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                </tbody>
-                            </table>
-                        </div>
+        {{-- PROXIMO LOTE --}}
+        <div class="container" id="next_lot_always">
+            <div class="row d-flex justify-content-center mt-2">
+                <div class="col-12 mt-5">
+                    <div class="col-12 mt-5" style="text-align: center" id="next_lot">
+                        <strong><p style="font-size: 4em" class="mb-0">PRÓXIMO LOTE</p></strong>
+                        <strong><p style="font-size: 6em"><span id="next_lot_always_text"></span></p></strong>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('js-script')
@@ -122,20 +132,22 @@
     .listen('.MessageEvent', (data)=>{
 
         console.log(data);
-
+        $('#option1').hide();
         if(data.is_new==true){
             runConfetti();
-            $('#option2').show();
             $('#results').hide();
+            $('#option2').show();
+            $('#next_lot_always').hide();
             $('#congratulations').fadeIn(500);
-            $('#winner-name').text(`${data.results[0][0].last_name} ${data.results[0][0].mothers_last_name}, ${data.results[0][0].first_name}`)
-            setTimeout(function() {
+            $('#winner-name').text(`${data.results[0][0].last_name}, ${data.results[0][0].first_name}`)
+            setTimeout(() => {
                 $('#congratulations').fadeOut(500);
                 $('#results').show();
+                runTable();
             },10000);
-            runTable();
         }else{
             $('#congratulations').hide();
+            $('#next_lot_always').hide();
             $('#option2').show();
             runTable();
         }
@@ -144,7 +156,10 @@
             $('.output-header').removeClass('group1');
             $('.output-header').removeClass('group2');
             $('.output-header').removeClass('group3');
+            $('.output-header').removeClass('group4');
             $('.output-header').addClass('group'+data.group);
+
+            $('#results').show();
 
             if(data.winner_type=='headline'){
                 $('#alternates').hide();
@@ -152,7 +167,6 @@
             }else if(data.winner_type=='alternate'){
                 $('#alternates').show();
                 $('#headlines').hide();
-                $('#alternates').find('.row').addClass('d-flex justify-content-center')
             }
 
             ///////////////////////////////
@@ -179,14 +193,14 @@
                 $('#winner_type_text').text("TITULARES");
                 $(".screenResultTable > tbody > tr").remove()
                 $.each(data.results[0], function(key,value) {
-                    var row = $("<tr class='py-0'><td>"+value.lot_number+"/"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+                    var row = $("<tr class='py-0'><td>"+value.denomination+"</td><td>"+value.code+"</td><td>"+value.last_name+", "+value.first_name+"</td></tr>");
                     $(".screenResultTable > tbody").append(row);
                 })
             }else{
                 $('#winner_type_text').text("SUPLENTES");
                 $(".screenResultTable > tbody > tr").remove()
                 $.each(data.results[0], function(key,value) {
-                    var row = $("<tr class='py-0'><td>"+value.order_number+"</td><td>"+value.code+"</td><td>"+value.last_name+" "+value.mothers_last_name+", "+value.first_name+"</td></tr>");
+                    var row = $("<tr class='py-0'><td>"+value.order_number+"</td><td>"+value.code+"</td><td>"+value.last_name+", "+value.first_name+"</td></tr>");
                     $(".screenResultTable > tbody").append(row);
                 })
             }
@@ -194,25 +208,42 @@
             $('#group_text').text('GRUPO '+data.group)
 
             if(data.next_lot!=null){
-                $('#next_lot_sidebar_container').show();
-                $('#results_table_container').removeClass('col-md-8').addClass('col-md-7');
-                var next_lot_image;
-                $('#next_lot_text').text('LOTE '+data.next_lot.lot_number+' - '+data.next_lot.denomination)
-                if(data.next_lot.image=='noimage'){
-                    next_lot_image = 'noimage.png';
-                }else{  
-                    next_lot_image = data.next_lot.image
+                if(data.results[0].length==0) {
+                    $('#next_lot').show();
+                    $('#next_lot_text').text('LOTE '+data.next_lot.denomination)
+                }else{
+                    $('#next_lot').hide();
                 }
-                var path = `{{asset('assets/images/lots/${next_lot_image}')}}`
-                $('#next_lot_img').attr('src', path)
             }else{
-                $('#next_lot_sidebar_container').hide();
-                $('#results_table_container').removeClass('col-md-7').addClass('col-md-8');
+                $('#next_lot').hide();
                 $('#results_table_container').find('.row').addClass('d-flex justify-content-center')
             }
 
             showOption2();
         }
+
+    });
+
+    window.Echo.channel('proximo-sorteo-channel')
+    .listen('.MessageEvent', (data)=>{
+        console.log("PROXIMO: ", data)
+        $('#congratulations').hide();
+        showOption2();
+        $('#results').hide();
+        $('.output-header').removeClass('group1');
+        $('.output-header').removeClass('group2');
+        $('.output-header').removeClass('group3');
+        $('.output-header').removeClass('group4');
+        $('.output-header').addClass('group'+data.message.group);
+        if (data.message.lottery_type==='GENERAL') {
+            $('#lottery_type_text').text("SORTEO GENERAL");
+        }else if(data.message.lottery_type==='CPD'){
+            $('#lottery_type_text').text("SORTEO CPD");
+        }
+        $('#winner_type_text').text("TITULARES");
+        $('#group_text').text('GRUPO '+data.message.group)
+        $('#next_lot_always').show();
+        $('#next_lot_always_text').text(`LOTE ${data.message.denomination}`);
 
     });
 

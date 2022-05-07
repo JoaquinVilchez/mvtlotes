@@ -25,7 +25,7 @@ function updateOutputData($group, $lottery_type, $winner_type, $isNew)
         ->where('persons.group', $group)
         ->where('results.winner_type', $winner_type)
         ->where('results.lottery_type', $lottery_type)
-        ->orderBy('results.created_at', 'desc')->take(5)->get();
+        ->orderBy('results.created_at', 'desc')->take(3)->get();
 
     $lots = Lot::where('group', $group)->where('lottery_type', $lottery_type)->get();
     if ($lots->count() > 0) {

@@ -20,9 +20,4 @@ class Lot extends Model
     {
         return $this->hasOne(Result::class);
     }
-
-    public function getFullName()
-    {
-        return $this->lot_number . ' / ' . $this->denomination;
-    }
 }

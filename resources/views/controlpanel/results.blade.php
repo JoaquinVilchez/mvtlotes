@@ -38,7 +38,7 @@
                                                 <td>{{$result->person->group}}</td>
                                                 <td>{{strtoupper($result->lottery_type)}}</td>
                                                 <td>{{ucfirst(translate($result->winner_type))}}</td>
-                                                <td>@if($result->winner_type=='headline') {{$result->lot->getFullName()}} @else - @endif</td>
+                                                <td>@if($result->winner_type=='headline') {{$result->lot->denomination}} @else - @endif</td>
                                                 <td>{{$result->person->code}}</td>
                                                 <td>{{$result->person->displayName()}}</td></td>
                                                 <td>

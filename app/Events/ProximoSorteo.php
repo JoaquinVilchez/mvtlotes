@@ -21,7 +21,7 @@ class ProximoSorteo implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Lot $lot)
+    public function __construct($lot)
     {
         $this->lot = $lot;
     }
@@ -48,3 +48,4 @@ class ProximoSorteo implements ShouldBroadcast
         ];
     }
 }
+

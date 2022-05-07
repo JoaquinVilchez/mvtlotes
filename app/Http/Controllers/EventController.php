@@ -17,10 +17,19 @@ class EventController extends Controller
         event(new PlacaGeneral());
     }
 
-    public function proximoSorteo()
+    public function proximoSorteo(Request $request)
     {
-        $lot = Lot::find(3);
-        event(new ProximoSorteo($lot));
+        $lots = Lot::where('group', $request->group)->where('lottery_type', $request->lottery_type)->get();
+        if ($lots->count() > 0) {
+            $nextLot = $lots->filter(function ($value, $key) {
+                if (!$value->result) {
+                    return $value;
+                }
+            })->first();
+        }
+        
+        event(new ProximoSorteo($nextLot));
+        
     }
 
     public function ultimos5Ganadores(Request $request)

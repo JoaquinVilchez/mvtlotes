@@ -28,9 +28,9 @@
                                 @foreach ($lots as $lot)
                                     <tr>
                                         <td hidden>{{$lot->id}}</td>
-                                        <td>{{$lot->getFullName()}}</td>
+                                        <td>{{$lot->denomination}}</td>
                                         <td>{{$lot->group}}</td>
-                                        <td>@if($lot->result) {{ucfirst($lot->result->lottery_type)}}@endif</td>
+                                        <td>{{$lot->lottery_type}}</td>
                                         <td>@if($lot->result){{ $lot->result->person->displayName() }} @else - @endif</td>
                                         <td>@if($lot->image!='noimage') <a href="#" data-image="{{$lot->image}}" data-toggle="modal" data-target="#lotImageModal">Ver croquis</a> @else <span class="app-text-muted">Sin imágen</span> @endif</td>
                                         <td>

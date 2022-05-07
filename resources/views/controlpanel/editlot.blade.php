@@ -20,7 +20,7 @@
                                 @csrf
                                 <div class="mb-3">
                                   <label class="form-label">Número</label>
-                                  <input type="text" value="{{$lot->lot_number}}" class="form-control" disabled>
+                                  <input type="text" value="{{$lot->denomination}}" class="form-control" disabled>
                                   <div class="form-text">El número del lote no se puede modificar</div>
                                 </div>
                                 <div class="mb-3">

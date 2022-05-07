@@ -24,12 +24,6 @@ class Person extends Model
 
     public function displayName()
     {
-        if ($this->mothers_last_name) {
-            $fullName = strtoupper($this->last_name) . ' ' . strtoupper($this->mothers_last_name) . ', ' . $this->first_name;
-        } else {
-            $fullName = strtoupper($this->last_name) . ', ' . $this->first_name;
-        }
-
-        return $fullName;
+        return strtoupper($this->last_name) . ', ' . $this->first_name;
     }
 }
