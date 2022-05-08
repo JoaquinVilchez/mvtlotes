@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="output">
+<div id="output" style="padding-left: 130px;">
     <div id="option1">
             <div class="d-flex justify-content-center align-items-center flex-column vh-100">
                 <div class="row">
@@ -50,11 +50,11 @@
             {{-- LISTADO DE TITULARES --}}
             <div class="container m-auto" id="headlines">
                 <div class="row d-flex justify-content-center mt-2">
-                     <div class="col-12 mt-5" style="text-align: center" id="next_lot">
+                     <div class="col-12 mt-3" style="text-align: center" id="next_lot">
                         <strong><p style="font-size: 4em" class="mb-0">PRÓXIMO LOTE</p></strong>
                         <strong><p style="font-size: 6em"><span id="next_lot_text"></span></p></strong>
                     </div>
-                    <div class="col-12 mt-5" id="results_table_container">
+                    <div class="col-12 mt-3" id="results_table_container">
                         <h2 class="app-text-bold last_winners_text mb-4" style="font-size: 3em; text-align:center"></h2>
                         <table class="table table-striped screenResultTable app-text-bold" style="font-size: 3em; text-align:center" >
                             <thead>
@@ -73,7 +73,7 @@
             {{-- LISTADO DE SUPLENTES --}}
             <div class="container m-auto" id="alternates">
                 <div class="row d-flex justify-content-center mt-2">
-                    <div class="col-12 mt-5">
+                    <div class="col-12 mt-3">
                         <h2 style="font-size: 3em; text-align:center" class="app-text-bold last_winners_text mb-4"></h2>
                         <table class="table table-striped screenResultTable app-text-bold" style="font-size:3em; text-align:center">
                             <thead>
@@ -95,8 +95,8 @@
         {{-- PROXIMO LOTE --}}
         <div class="container" id="next_lot_always">
             <div class="row d-flex justify-content-center mt-2">
-                <div class="col-12 mt-5">
-                    <div class="col-12 mt-5" style="text-align: center" id="next_lot">
+                <div class="col-12 mt-3">
+                    <div class="col-12 mt-3" style="text-align: center" id="next_lot">
                         <strong><p style="font-size: 4em" class="mb-0">PRÓXIMO LOTE</p></strong>
                         <strong><p style="font-size: 6em"><span id="next_lot_always_text"></span></p></strong>
                     </div>
