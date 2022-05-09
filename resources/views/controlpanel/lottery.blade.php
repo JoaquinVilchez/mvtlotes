@@ -28,9 +28,9 @@
                                     <label class="form-label">Grupo</label>
                                     <select name="group" class="form-control" id="group-select" autofocus>
                                         <option value="">Seleccione un grupo</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <!-- <option value="1">1</option> -->
+                                        <!-- <option value="2">2</option> -->
+                                        <!-- <option value="3">3</option> -->
                                         <option value="4">4</option>
                                     </select>
                                     {!!$errors->first('group', '<small style="color:red"><i class="fas fa-exclamation-circle"></i> :message</small>') !!}

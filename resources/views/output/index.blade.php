@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="output" style="padding-left: 130px;">
+<div id="output" >
     <div id="option1">
             <div class="d-flex justify-content-center align-items-center flex-column vh-100">
                 <div class="row">
@@ -19,12 +19,12 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-12" style="text-align: center">
                         <div class="row d-flex justify-content-between align-items-center mx-4">
-                            <div><img src="{{asset('assets/images/logonuestroterreno-negro.png')}}" style="width: 250px" class="output2-logo mx-4"></div>
-                            <div>
+                            <div><img src="{{asset('assets/images/logo_nuestroterreno_blanco.png')}}" style="width: 250px" class="output2-logo mx-4"></div>
+                            <div style="color:white">
                                 <h1 class="my-2 app-text-bold"><span id="lottery_type_text"></span> - <span id="winner_type_text"></span></h1>
                                 <h1 id="group_text"></h1>
                             </div>
-                            <div><img src="{{asset('assets/images/logomvt-negro.png')}}" class="output2-logo mx-4"></div>
+                            <div><img src="{{asset('assets/images/logomvt-blanco.png')}}" class="output2-logo mx-4"></div>
                         </div>
                         {{-- <hr style="background-color:white"> --}}
                     </div>
@@ -55,7 +55,7 @@
                         <strong><p style="font-size: 6em"><span id="next_lot_text"></span></p></strong>
                     </div>
                     <div class="col-12 mt-3" id="results_table_container">
-                        <h2 class="app-text-bold last_winners_text mb-4" style="font-size: 3em; text-align:center"></h2>
+                        <h2 class="app-text-bold last_winners_text mb-2" style="font-size: 3em; text-align:center"></h2>
                         <table class="table table-striped screenResultTable app-text-bold" style="font-size: 3em; text-align:center" >
                             <thead>
                                 <tr>
